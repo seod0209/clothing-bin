@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 const H1 = styled.h1`
   letter-spacing: 1.5px;
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
 `;
 
 const H2 = styled.div`

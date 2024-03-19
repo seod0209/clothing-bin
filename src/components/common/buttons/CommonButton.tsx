@@ -23,21 +23,17 @@ const CommonButtonContainer = styled.button<{
   border: 2px solid;
 
   &:hover {
-    .common_button_opacity {
-      background-color: #ffffff33;
-    }
+    background-color: #ffffff33;
   }
 
   &:active {
-    .common_button_opacity {
-      background-color: #00000033;
-    }
+    background-color: #00000033;
   }
   &:disabled {
-    border-color: ${({ theme }) => theme.colors.stroke.primary};
-    background-color: ${({ theme }) => theme.colors.background.tertiary};
+    border-color: ${({ theme }) => theme.colors?.stroke?.primary};
+    background-color: ${({ theme }) => theme.colors?.background?.tertiary};
     box-shadow: none;
-    color: ${({ theme }) => theme.colors.text.tertiary};
+    color: ${({ theme }) => theme.colors?.text?.tertiary};
   }
 `;
 
@@ -56,3 +52,5 @@ const CommonButton: FC<PropsWithChildren<CommonButtonProps>> = ({
     </CommonButtonContainer>
   );
 };
+
+export default CommonButton;
