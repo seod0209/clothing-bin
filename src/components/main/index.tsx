@@ -3,19 +3,17 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 import theme from "@/styles/theme";
-import Header from "../common/header";
+import GNB from "../common/gnb";
 
 const MainContainer = styled.div`
   ${theme.common.flexCenter};
   width: 100%;
-  padding-bottom: 50px;
 `;
 const MainInner = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 24px;
-  width: 620px;
+  width: 100%;
 
   @media screen and (max-width: 768px) {
     padding-left: 16px;
@@ -28,7 +26,7 @@ const Main: FC = () => {
   return (
     <MainContainer>
       <MainInner>
-        <Header />
+        <GNB />
       </MainInner>
     </MainContainer>
   );
