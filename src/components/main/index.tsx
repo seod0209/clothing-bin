@@ -1,9 +1,9 @@
-"use-client";
-
+"use client";
 import React, { FC } from "react";
 import styled from "styled-components";
 
 import theme from "@/styles/theme";
+import Header from "../common/header";
 
 const MainContainer = styled.div`
   ${theme.common.flexCenter};
@@ -27,7 +27,9 @@ const MainInner = styled.div`
 const Main: FC = () => {
   return (
     <MainContainer>
-      <MainInner></MainInner>
+      <MainInner>
+        <Header />
+      </MainInner>
     </MainContainer>
   );
 };
