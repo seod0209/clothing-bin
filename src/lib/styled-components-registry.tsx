@@ -35,3 +35,5 @@ const StyledComponentRegistry = ({
     </StyleSheetManager>
   );
 };
+
+export default StyledComponentRegistry;
