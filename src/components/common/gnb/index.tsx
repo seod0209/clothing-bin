@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 import { PiLockers } from "react-icons/pi";
+import { AiOutlineMenu } from "react-icons/ai";
 
 import theme from "@/styles/theme";
 
@@ -15,9 +16,6 @@ const GNBContainer = styled.div`
 
   padding: 16px;
   width: 100%;
-
-  @media screen and (max-width: 768px) {
-  }
 `;
 
 const LeftSideConatiner = styled.div`
@@ -27,6 +25,7 @@ const LeftSideConatiner = styled.div`
   gap: 8px;
   padding-left: 16px;
   width: 100%;
+  min-width: 180px;
 `;
 const RightSideContainer = styled.div`
   ${theme.common.flexCenter}
