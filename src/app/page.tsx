@@ -1,12 +1,6 @@
-export default function Home() {
-  return (
-    <main>
-      <div>
-        <p>
-          Get started by editing&nbsp;
-          <code>src/app/page.tsx</code>
-        </p>
-      </div>
-    </main>
-  );
+import Main from "@/components/main";
+
+// https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#step-4-migrating-pages
+export default async function Page() {
+  return <Main />;
 }
