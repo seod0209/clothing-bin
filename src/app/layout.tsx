@@ -1,29 +1,33 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 
-import StyledComponentRegistry from "@/lib/styled-components-registry";
-import { Pretendard } from "@/styles/fonts";
+import StyledComponentRegistry from '@/lib/styled-components-registry';
+import { Pretendard } from '@/styles/fonts';
 
 export const metadata: Metadata = {
-  title: "옷체통",
-  description: "서울시 헌옷 수거함 위치 정보 표시",
+  title: '옷체통',
+  description: '서울시 헌옷 수거함 위치 정보 표시',
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "white",
+  themeColor: 'white',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <body className={`${Pretendard.className}`}>
+        <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
         <StyledComponentRegistry>
           <main>{children}</main>
         </StyledComponentRegistry>
