@@ -1,18 +1,15 @@
-"use client";
-import React, { FC } from "react";
-import styled from "styled-components";
+'use client';
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import theme from "@/styles/theme";
-import GNB from "../common/gnb";
+import GNB from '../common/gnb';
+import SearchAndMap from '../search-and-map';
+import Script from 'next/script';
 
 const MainContainer = styled.div`
-  ${theme.common.flexCenter};
-  width: 100%;
-`;
-const MainInner = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  align-items: center;
   width: 100%;
 
   @media screen and (max-width: 768px) {
@@ -25,9 +22,14 @@ const MainInner = styled.div`
 const Main: FC = () => {
   return (
     <MainContainer>
-      <MainInner>
-        <GNB />
-      </MainInner>
+      <GNB />
+      <SearchAndMap />
+      <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" strategy="afterInteractive" async />
+      <Script
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services`}
+        strategy="afterInteractive"
+        async
+      />
     </MainContainer>
   );
 };
