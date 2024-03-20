@@ -2,14 +2,14 @@
 const nextConfig = {
   swcMinify: true,
   compiler: {
-    removeConsole: {
-      exclude: ["error"],
-    },
+    // removeConsole: {
+    //   exclude: ["error"],
+    // },
     styledComponents: true,
   },
   trailingSlash: false,
   reactStrictMode: true,
-  output: "standalone",
+  output: 'standalone',
 
   eslint: {
     ignoreDuringBuilds: true,
@@ -20,9 +20,7 @@ const nextConfig = {
 
   webpack: (config) => {
     // SVGR: https://react-svgr.com/docs/next/
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.(".svg"),
-    );
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
 
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
@@ -36,7 +34,7 @@ const nextConfig = {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: ["@svgr/webpack"],
+        use: ['@svgr/webpack'],
       },
     );
 

@@ -23,6 +23,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${Pretendard.className}`}>
         <StyledComponentRegistry>
           <main>{children}</main>
+          <Script
+            strategy="beforeInteractive"
+            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${env.process.NEXT_PUBLIC_NAVER_CLIENT_ID}`}
+          />
         </StyledComponentRegistry>
       </body>
     </html>

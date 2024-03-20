@@ -4,7 +4,7 @@ const next = require('next');
 const fs = require('fs');
 
 const PORT = 443;
-const HOSTNAME = 'localhost.clothing.bin';
+const HOSTNAME = 'localhost';
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev, hostname: HOSTNAME, port: PORT });
@@ -21,6 +21,6 @@ app.prepare().then(() => {
     handle(req, res, parseUrl);
   }).listen(3000, (err) => {
     if (err) throw err;
-    console.log('> Ready on https://localhost.clothing.bin:3000');
+    console.log('> Ready on https://localhost:3000');
   });
 });
