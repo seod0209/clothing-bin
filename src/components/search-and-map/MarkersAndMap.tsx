@@ -6,7 +6,7 @@ import { useMap } from '@/hooks/useMap';
 
 const MarkersAndMapContainer = styled.div`
   ${theme.common.flexCenter};
-  width: 800px;
+  width: 100%;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -15,7 +15,11 @@ const MarkersAndMapContainer = styled.div`
 
 const MapBox = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 72vh;
+
+  @media screen and (max-width: 768px) {
+    height: 70vh;
+  }
 `;
 
 interface MarkersAndMapProps {

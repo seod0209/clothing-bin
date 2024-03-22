@@ -34,6 +34,7 @@ const LeftSideConatiner = styled.div`
 `;
 const RightSideContainer = styled.div`
   ${theme.common.flexCenter}
+  gap: 16px;
   width: 100%;
   @media screen and (max-width: 768px) {
     justify-content: flex-end;

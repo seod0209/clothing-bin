@@ -8,7 +8,6 @@ const H1 = styled.h1`
 `;
 
 const H2 = styled.div`
-  margin: 0 12px;
   font-size: 24px;
   font-weight: 500;
   text-align: center;

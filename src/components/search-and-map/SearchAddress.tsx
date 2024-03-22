@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 import { TbMapPinSearch } from 'react-icons/tb';
 
-import Theme from '@/styles/theme';
-
 const SearchAddressContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -37,6 +36,13 @@ const CurrentAddressText = styled.span`
   line-height: 20px;
 `;
 
+const SearchAddreesBox = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 0;
+  z-index: 5;
+`;
+
 interface SearchAddressProps extends DaumPostcodeEmbedProps {
   setCurrAddress: (adr: string) => void;
 }
@@ -57,7 +63,9 @@ const SearchAddress: FC<SearchAddressProps> = ({ setCurrAddress, ...props }) => 
         <TbMapPinSearch size={20} />
       </SearchOpenButton>
       <CurrentAddressText>현재 주소: {address}</CurrentAddressText>
-      <DaumPostcodeEmbed style={{ width: 300 }} onComplete={handleComplete} {...props} autoClose={false} />
+      <SearchAddreesBox>
+        <DaumPostcodeEmbed style={{ width: '100%' }} onComplete={handleComplete} {...props} />
+      </SearchAddreesBox>
     </SearchAddressContainer>
   );
 };
