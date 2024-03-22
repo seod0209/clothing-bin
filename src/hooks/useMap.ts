@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 export function useMap() {
-  const mapRef = useRef<HTMLElement | null | any>(null);
+  // const mapRef = useRef<HTMLElement | null | any>(null);
 
   const [myLocation, setMyLocation] = useState<{ lat: number; lon: number } | string>('');
+  // manage the map instance as 'state' to display markers in the exposed areas
+  const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
 
   useEffect(() => {
     // Check current location by using geolocation.
@@ -27,13 +29,29 @@ export function useMap() {
       // find current location
       let currentPosision = [myLocation.lat, myLocation.lon];
 
+      // map options
+      const mapOptions: naver.maps.MapOptions = {
+        zoom: 13,
+        minZoom: 13,
+        maxZoom: 17,
+        zoomControl: true,
+        zoomControlOptions: {
+          style: naver.maps.ZoomControlStyle.SMALL,
+          position: naver.maps.Position.TOP_RIGHT,
+        },
+        mapDataControl: false,
+        scaleControl: false,
+      };
+
       // make Naver map
       const map = new naver.maps.Map('map', {
         center: new naver.maps.LatLng(currentPosision[0], currentPosision[1]),
-        zoomControl: true,
+        ...mapOptions,
       });
 
-      mapRef.current = map;
+      //  mapRef.current = map;
+
+      setNewMap(map);
 
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(myLocation.lat, myLocation.lon),
@@ -42,5 +60,5 @@ export function useMap() {
     }
   }, [myLocation]);
 
-  return { myLocation };
+  return { myLocation, newMap };
 }

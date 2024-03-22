@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const H1 = styled.h1`
   letter-spacing: 1.5px;
