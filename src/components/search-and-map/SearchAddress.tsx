@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const SearchAddressContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 20%;
 `;
 
 const SearchPopup = styled.div`
@@ -37,7 +37,7 @@ const SearchAddress: FC<SearchAddressProps> = ({ setCurrAddress, ...props }) => 
     setCurrAddress(fullAddress);
   }, []);
 
-  return <DaumPostcodeEmbed onComplete={handleComplete} {...props} autoClose={false} />;
+  return <DaumPostcodeEmbed style={{ width: 300 }} onComplete={handleComplete} {...props} autoClose={false} />;
 
   // var element_layer = document.getElementById('layer');
 

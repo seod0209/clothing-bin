@@ -17,6 +17,13 @@ export const viewport: Viewport = {
   themeColor: 'white',
 };
 
+// Add kakao type to global object
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
@@ -25,7 +32,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Script
             strategy="beforeInteractive"
-            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${env.process.NEXT_PUBLIC_NAVER_CLIENT_ID}`}
+            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`}
+          />
+          <Script
+            // Scripts with beforeInteractive enabled only work within root layout
+            // beforeInteractive: Run before hydration
+            strategy="beforeInteractive"
+            // Because the useEffect code runs before the script, maps properties cannot be found
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`}
           />
         </StyledComponentRegistry>
       </body>

@@ -2,10 +2,11 @@ import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import theme from '@/styles/theme';
+import { useMap } from '@/hooks/useMap';
 
 const MarkersAndMapContainer = styled.div`
   ${theme.common.flexCenter};
-  width: 100%;
+  width: 800px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -14,6 +15,7 @@ const MarkersAndMapContainer = styled.div`
 
 const MapBox = styled.div`
   width: 100%;
+  height: 90vh;
 `;
 
 interface MarkersAndMapProps {
@@ -22,8 +24,9 @@ interface MarkersAndMapProps {
   binLocations: string[];
 }
 
-const SearchAndMap: FC<MarkersAndMapProps> = ({ currLocation, binLocations }) => {
-  useEffect(() => {}, []);
+const MarkersAndMap: FC<MarkersAndMapProps> = ({ currLocation, binLocations }) => {
+  useMap();
+
   return (
     <MarkersAndMapContainer>
       <MapBox id="map"></MapBox>
@@ -31,4 +34,4 @@ const SearchAndMap: FC<MarkersAndMapProps> = ({ currLocation, binLocations }) =>
   );
 };
 
-export default SearchAndMap;
+export default MarkersAndMap;
