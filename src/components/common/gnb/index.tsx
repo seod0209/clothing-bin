@@ -1,15 +1,15 @@
-import React, { FC } from "react";
-import styled from "styled-components";
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import { PiLockers } from "react-icons/pi";
-import { AiOutlineMenu } from "react-icons/ai";
+import { PiLockers } from 'react-icons/pi';
+import { AiOutlineMenu } from 'react-icons/ai';
 
-import theme from "@/styles/theme";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import theme from '@/styles/theme';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
-import TextButton from "../buttons/TextButton";
-import IconButton from "../buttons/IconButton";
-import { H1, H2 } from "../text";
+import TextButton from '../buttons/TextButton';
+import IconButton from '../buttons/IconButton';
+import { H1, H2 } from '../text';
 
 const GNBContainer = styled.div`
   display: flex;
@@ -34,6 +34,7 @@ const LeftSideConatiner = styled.div`
 `;
 const RightSideContainer = styled.div`
   ${theme.common.flexCenter}
+  gap: 16px;
   width: 100%;
   @media screen and (max-width: 768px) {
     justify-content: flex-end;
@@ -42,7 +43,7 @@ const RightSideContainer = styled.div`
 
 const GNB: FC = () => {
   const isMobile = useIsMobile();
-  console.log("시발?", isMobile);
+
   return (
     <GNBContainer>
       <LeftSideConatiner>

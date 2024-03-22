@@ -1,23 +1,22 @@
-"use client";
-import React, { FC } from "react";
-import styled from "styled-components";
+'use client';
+import React, { FC } from 'react';
+import styled from 'styled-components';
 
-import theme from "@/styles/theme";
-import GNB from "../common/gnb";
+import Theme from '@/styles/theme';
+
+import GNB from '../common/gnb';
+import SearchAndMap from '../search-and-map';
 
 const MainContainer = styled.div`
-  ${theme.common.flexCenter};
+  ${Theme.common.flexCenter};
   width: 100%;
 `;
+
 const MainInner = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
+  padding: 20px 16px;
+  width: 1160px;
 
   @media screen and (max-width: 768px) {
-    padding-left: 16px;
-    padding-right: 16px;
     width: 100%;
   }
 `;
@@ -27,6 +26,7 @@ const Main: FC = () => {
     <MainContainer>
       <MainInner>
         <GNB />
+        <SearchAndMap />
       </MainInner>
     </MainContainer>
   );

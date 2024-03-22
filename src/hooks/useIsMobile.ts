@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import { useWindowSize } from "./useWindowSIze";
+import { useWindowSize } from './useWindowSize';
 
 const MOBILE_SIZE = 768;
 
