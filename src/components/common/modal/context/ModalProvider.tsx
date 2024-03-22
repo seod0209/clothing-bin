@@ -8,7 +8,7 @@ type ModalUIContextType = {
 };
 
 // Create the context
-export const ModalUIContext = createContext<ModalUIContextType | undefined>(undefined);
+export const ModalUIContext = createContext<ModalUIContextType >({} as ModalUIContextType) ;
 
 // Context Wrapper component
 export const ModalUIProvider: React.FC<PropsWithChildren> = ({ children=undefined }) => {
