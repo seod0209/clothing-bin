@@ -2,11 +2,13 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import theme from '@/styles/theme';
-import { useMap } from '@/hooks/useMap';
+import Loader from '../common/Loader';
 
 const MarkersAndMapContainer = styled.div`
   ${theme.common.flexCenter};
   width: 100%;
+
+  background-color: gray;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -22,15 +24,9 @@ const MapBox = styled.div`
   }
 `;
 
-interface MarkersAndMapProps {
-  currLocation: string;
+interface MarkersAndMapProps {}
 
-  binLocations: string[];
-}
-
-const MarkersAndMap: FC<MarkersAndMapProps> = ({ currLocation, binLocations }) => {
-  useMap();
-
+const MarkersAndMap: FC<MarkersAndMapProps> = () => {
   return (
     <MarkersAndMapContainer>
       <MapBox id="map"></MapBox>

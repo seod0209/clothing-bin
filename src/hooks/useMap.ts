@@ -1,9 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+interface Coords {
+  lat: number;
+  lon: number;
+}
 
 export function useMap() {
-  // const mapRef = useRef<HTMLElement | null | any>(null);
+  const CITY_HALL_COORD = { lat: 37.5666, lon: 126.9782 };
 
-  const [myLocation, setMyLocation] = useState<{ lat: number; lon: number } | string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
   // manage the map instance as 'state' to display markers in the exposed areas
   const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
 
@@ -13,14 +19,13 @@ export function useMap() {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        setMyLocation({
-          lat: pos.coords.latitude,
-          lon: pos.coords.longitude,
-        });
+        if (pos) {
+          setMyLocation({
+            lat: pos.coords.latitude,
+            lon: pos.coords.longitude,
+          });
+        }
       });
-    } else {
-      window.alert('현재 위치를 알 수 없어 기본위치로 지정합니다.');
-      setMyLocation({ lat: 37.4862618, lon: 127.1222903 });
     }
   }, []);
 
@@ -52,7 +57,7 @@ export function useMap() {
       //  mapRef.current = map;
 
       setNewMap(map);
-
+      setIsLoading(false);
       const marker = new naver.maps.Marker({
         position: new naver.maps.LatLng(myLocation.lat, myLocation.lon),
         map,
@@ -60,5 +65,5 @@ export function useMap() {
     }
   }, [myLocation]);
 
-  return { myLocation, newMap };
+  return { isLoading };
 }

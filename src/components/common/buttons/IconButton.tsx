@@ -1,12 +1,7 @@
-import {
-  FC,
-  type ButtonHTMLAttributes,
-  PropsWithChildren,
-  useMemo,
-} from "react";
-import styled from "styled-components";
+import { FC, type ButtonHTMLAttributes, PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
-import Theme from "@/styles/theme";
+import Theme from '@/styles/theme';
 
 const IconButtonContainer = styled.button`
   ${Theme.common.flexCenterColumn}
@@ -33,10 +28,7 @@ const IconButtonContainer = styled.button`
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const IconButton: FC<PropsWithChildren<IconButtonProps>> = ({
-  children = undefined,
-  ...props
-}) => {
+const IconButton: FC<PropsWithChildren<IconButtonProps>> = ({ children = undefined, ...props }) => {
   return <IconButtonContainer {...props}>{children}</IconButtonContainer>;
 };
 
