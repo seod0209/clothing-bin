@@ -22,18 +22,30 @@ const SearchAndMapContainer = styled.div`
   }
 `;
 
+const MarkersAndMapContainer = styled.div`
+  position: relative;
+  ${Theme.common.flexCenter};
+  width: 100%;
+
+  background-color: #ebedeb;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
 const SearchAndMap: FC = () => {
   const { isLoading } = useMap();
   const [currAddress, setCurrAddress] = useState<string>('');
 
   return (
-    <>
-      {isLoading && <Loader />}
-      <SearchAndMapContainer>
-        <SearchAddress setCurrAddress={setCurrAddress} />
+    <SearchAndMapContainer>
+      <SearchAddress setCurrAddress={setCurrAddress} />
+      <MarkersAndMapContainer>
+        {isLoading && <Loader />}
         <MarkersAndMap />
-      </SearchAndMapContainer>
-    </>
+      </MarkersAndMapContainer>
+    </SearchAndMapContainer>
   );
 };
 
