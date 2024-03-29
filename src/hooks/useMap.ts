@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMarker } from './useMarker';
 
 interface Coords {
   lon: number; // point.x
@@ -11,12 +12,12 @@ export function useMap() {
   const markerRef = useRef<naver.maps.Marker | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
+  const { updateMarkers } = useMarker();
 
   // manage the map instance as 'state' to display markers in the exposed areas
   useEffect(() => {
     // Check current location by using geolocation.
     // If there is no agreement with sharing location, set default location.
-
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         if (pos) {
@@ -64,8 +65,23 @@ export function useMap() {
       setIsLoading(false);
     };
     initMap();
+
+    const zoom = naver.maps.Event.addListener(mapRef.current, 'zoom_changed', () => {
+      if (mapRef.current !== null) {
+        updateMarkers(mapRef.current, [markerRef.current!]);
+      }
+    });
+
+    const dragend = naver.maps.Event.addListener(mapRef.current, 'dragend', () => {
+      if (mapRef.current !== null) {
+        updateMarkers(mapRef.current, [markerRef.current!]);
+      }
+    });
+
     return () => {
       initMap();
+      naver.maps.Event.removeListener(zoom);
+      naver.maps.Event.removeListener(dragend);
     };
   }, [myLocation]);
 
