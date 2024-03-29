@@ -8,6 +8,7 @@ import Theme from '@/styles/theme';
 import SearchAddress from './SearchAddress';
 
 import Loader from '../common/Loader';
+import useMarkers from './use-markers';
 
 const SearchAndMapContainer = styled.div`
   ${Theme.common.flexCenterColumn};
@@ -45,6 +46,8 @@ const MapBox = styled.div`
 const SearchAndMap: FC = () => {
   const { isLoading, handleAddressMarker } = useMap();
   const [currAddress, setCurrAddress] = useState<string>('');
+
+  const { markersQuery } = useMarkers();
 
   const handleCurrentMarker = useCallback((address: string) => {
     setCurrAddress(address);

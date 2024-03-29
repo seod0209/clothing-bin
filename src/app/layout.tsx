@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 
 import StyledComponentRegistry from '@/lib/styled-components-registry';
+import ReactQueryClientProvider from '@/lib/query-provider';
+
 import { Pretendard } from '@/styles/fonts';
 
 export const metadata: Metadata = {
@@ -26,23 +28,25 @@ declare global {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
-      <body className={`${Pretendard.className}`}>
-        <StyledComponentRegistry>
-          <main>{children}</main>
-          <Script
-            strategy="beforeInteractive"
-            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&submodules=geocoder&callback=initMap`}
-          />
-          <Script
-            // Scripts with beforeInteractive enabled only work within root layout
-            // beforeInteractive: Run before hydration
-            strategy="beforeInteractive"
-            // Because the useEffect code runs before the script, maps properties cannot be found
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`}
-          />
-        </StyledComponentRegistry>
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="ko">
+        <body className={`${Pretendard.className}`}>
+          <StyledComponentRegistry>
+            <main>{children}</main>
+            <Script
+              strategy="beforeInteractive"
+              src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&submodules=geocoder&callback=initMap`}
+            />
+            <Script
+              // Scripts with beforeInteractive enabled only work within root layout
+              // beforeInteractive: Run before hydration
+              strategy="beforeInteractive"
+              // Because the useEffect code runs before the script, maps properties cannot be found
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`}
+            />
+          </StyledComponentRegistry>
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }
