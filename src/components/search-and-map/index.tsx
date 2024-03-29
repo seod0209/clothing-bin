@@ -1,12 +1,11 @@
 'use client';
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useMap } from '@/hooks/useMap';
 import Theme from '@/styles/theme';
 
 import SearchAddress from './SearchAddress';
-import MarkersAndMap from './MarkersAndMap';
 
 import Loader from '../common/Loader';
 
@@ -34,16 +33,30 @@ const MarkersAndMapContainer = styled.div`
   }
 `;
 
+const MapBox = styled.div`
+  width: 100%;
+  height: 72vh;
+
+  @media screen and (max-width: 768px) {
+    height: 70vh;
+  }
+`;
+
 const SearchAndMap: FC = () => {
-  const { isLoading } = useMap();
+  const { isLoading, handleAddressMarker } = useMap();
   const [currAddress, setCurrAddress] = useState<string>('');
+
+  const handleCurrentMarker = useCallback((address: string) => {
+    setCurrAddress(address);
+    handleAddressMarker(address);
+  }, []);
 
   return (
     <SearchAndMapContainer>
-      <SearchAddress setCurrAddress={setCurrAddress} />
+      <SearchAddress currAddress={currAddress} setCurrAddress={handleCurrentMarker} />
       <MarkersAndMapContainer>
         {isLoading && <Loader />}
-        <MarkersAndMap />
+        <MapBox id="map"></MapBox>
       </MarkersAndMapContainer>
     </SearchAndMapContainer>
   );
