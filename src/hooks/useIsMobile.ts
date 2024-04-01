@@ -7,13 +7,7 @@ const MOBILE_SIZE = 768;
 export function useIsMobile() {
   const size = useWindowSize();
 
-  const isMobile = useMemo(() => {
-    if (size === 0) {
-      return;
-    }
-
-    return size < MOBILE_SIZE;
-  }, [size]);
+  const isMobile = useMemo(() => size < MOBILE_SIZE, [size]);
 
   return isMobile;
 }

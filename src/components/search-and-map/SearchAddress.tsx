@@ -38,16 +38,15 @@ const CurrentAddressText = styled.span`
 `;
 
 interface SearchAddressProps extends DaumPostcodeEmbedProps {
+  currAddress?: string;
+
   setCurrAddress: (adr: string) => void;
 }
 
-const SearchAddress: FC<SearchAddressProps> = ({ setCurrAddress, ...props }) => {
-  const [address, setAddress] = useState<string>('');
+const SearchAddress: FC<SearchAddressProps> = ({ currAddress = undefined, setCurrAddress, ...props }) => {
   const { openModal, setOpenModal } = useContext(ModalUIContext);
 
   const handleComplete = useCallback((data: Address) => {
-    setAddress(data.address);
-
     setCurrAddress(data.address);
     setOpenModal(false);
   }, []);
@@ -58,7 +57,7 @@ const SearchAddress: FC<SearchAddressProps> = ({ setCurrAddress, ...props }) => 
         주소 찾기
         <TbMapPinSearch size={20} />
       </SearchOpenButton>
-      <CurrentAddressText>현재 주소: {address}</CurrentAddressText>
+      <CurrentAddressText>현재 주소: {currAddress}</CurrentAddressText>
       {openModal && (
         <Modal>
           <DaumPostcodeEmbed style={{ width: '100%', height: '100%' }} onComplete={handleComplete} {...props} />

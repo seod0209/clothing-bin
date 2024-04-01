@@ -1,12 +1,7 @@
-import {
-  FC,
-  type ButtonHTMLAttributes,
-  PropsWithChildren,
-  useMemo,
-} from "react";
-import styled from "styled-components";
+import { FC, type ButtonHTMLAttributes, PropsWithChildren, useMemo } from 'react';
+import styled from 'styled-components';
 
-import Theme from "@/styles/theme";
+import Theme from '@/styles/theme';
 
 const CommonButtonContainer = styled.button<{
   $isfull?: string;
@@ -14,8 +9,8 @@ const CommonButtonContainer = styled.button<{
   ${Theme.common.flexCenterColumn}
   position: relative;
   padding: 6px 16px;
-  width: ${({ $isfull }) => ($isfull ? "100%" : "fit-content")};
-  min-width: ${({ $isfull }) => ($isfull ? "100%" : "86px")};
+  width: ${({ $isfull }) => ($isfull ? '100%' : 'fit-content')};
+  min-width: ${({ $isfull }) => ($isfull ? '100%' : '86px')};
 
   height: 36px;
 
@@ -29,6 +24,7 @@ const CommonButtonContainer = styled.button<{
   &:active {
     background-color: #00000033;
   }
+
   &:disabled {
     border-color: ${({ theme }) => theme.colors?.stroke?.primary};
     background-color: ${({ theme }) => theme.colors?.background?.tertiary};
@@ -41,13 +37,9 @@ interface CommonButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isFull?: boolean;
 }
 
-const CommonButton: FC<PropsWithChildren<CommonButtonProps>> = ({
-  isFull = false,
-  children = undefined,
-  ...props
-}) => {
+const CommonButton: FC<PropsWithChildren<CommonButtonProps>> = ({ isFull = false, children = undefined, ...props }) => {
   return (
-    <CommonButtonContainer {...props} $isfull={isFull ? "isfull" : undefined}>
+    <CommonButtonContainer {...props} $isfull={isFull ? 'isfull' : undefined}>
       {children}
     </CommonButtonContainer>
   );
