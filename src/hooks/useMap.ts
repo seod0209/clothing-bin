@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMarker } from './useMarker';
+import useMarkers from 'src/components/search-and-map/use-markers';
 
 interface Coords {
   lon: number; // point.x
@@ -10,8 +11,11 @@ export function useMap() {
   const CITY_HALL_COORD = { lat: 37.5666, lon: 126.9782 };
   const mapRef = useRef<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker | null>(null);
+  const markersRef = useRef<naver.maps.Marker[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
+
+  const { markers } = useMarkers();
   const { updateMarkers } = useMarker();
 
   // manage the map instance as 'state' to display markers in the exposed areas
@@ -68,13 +72,13 @@ export function useMap() {
 
     const zoom = naver.maps.Event.addListener(mapRef.current, 'zoom_changed', () => {
       if (mapRef.current !== null) {
-        updateMarkers(mapRef.current, [markerRef.current!]);
+        updateMarkers(mapRef.current, [markerRef.current!, ...markersRef.current!]);
       }
     });
 
     const dragend = naver.maps.Event.addListener(mapRef.current, 'dragend', () => {
       if (mapRef.current !== null) {
-        updateMarkers(mapRef.current, [markerRef.current!]);
+        updateMarkers(mapRef.current, [markerRef.current!, ...markersRef.current!]);
       }
     });
 
@@ -84,6 +88,19 @@ export function useMap() {
       naver.maps.Event.removeListener(dragend);
     };
   }, [myLocation]);
+
+  useEffect(() => {
+    if (markers) {
+      markersRef.current = markers.map((marker) => {
+        return new naver.maps.Marker({
+          position: new naver.maps.LatLng(marker.x, marker.y),
+          clickable: true,
+          title: marker.address,
+          map: mapRef.current!,
+        });
+      });
+    }
+  }, [markers]);
 
   const handleAddressMarker = useCallback((address: string) => {
     naver.maps.Service.geocode({ query: address }, function (status, response) {

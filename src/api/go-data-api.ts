@@ -1,7 +1,7 @@
 //15106473/v1/uddi:c0982c3d-865d-4a96-897c-a67f24baeed5?page=1&perPage=10
 
 import { API } from './apiClient';
-import { AddressDto, SeoulAreasType } from './type';
+import { AddressDto, PageDto, SeoulGuType } from './type';
 
 const SeoulAreas = {
   Jongno: '15104622/v1/uddi:34ca4455-457d-4a50-ad1a-9b373f0f08eb',
@@ -30,8 +30,10 @@ const SeoulAreas = {
   Songpa: '15127100/v1/uddi:be5bca9a-0dbd-4a2a-b262-d5d7d8a6a4b0',
   Gangdong: '',
 };
-export const fetchArea = async (area: SeoulAreasType, page: number, perPage: number) => {
-  const resp = await API.get<AddressDto>(SeoulAreas[area], { params: { page, perPage } });
+export const fetchArea = async (area: SeoulGuType, page: number, perPage: number) => {
+  const resp = await API.get<PageDto<AddressDto>>(SeoulAreas[area], {
+    params: { page, perPage, serviceKey: process.env.NEXT_PUBLIC_GO_DATA_ENCODING_KEY },
+  });
 
-  return resp;
+  return resp.data;
 };

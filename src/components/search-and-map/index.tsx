@@ -47,8 +47,6 @@ const SearchAndMap: FC = () => {
   const { isLoading, handleAddressMarker } = useMap();
   const [currAddress, setCurrAddress] = useState<string>('');
 
-  const { markersQuery } = useMarkers();
-
   const handleCurrentMarker = useCallback((address: string) => {
     setCurrAddress(address);
     handleAddressMarker(address);

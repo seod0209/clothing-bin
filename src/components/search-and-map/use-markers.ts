@@ -1,20 +1,23 @@
 import { fetchArea } from '@/api/go-data-api';
 import { useQuery } from '@tanstack/react-query';
+import { MarkerData } from './type';
 
 const useMarkers = () => {
   const markersQuery = useQuery({
-    queryKey: ['markers.fetch.seoul-yeongdeungpo', 'yeongdeungpo'],
+    queryKey: ['markers-seoul-yeongdeungpo', 'yeongdeungpo'],
     queryFn: () =>
-      fetchArea('Yeongdeungpo', 1, 10)
+      fetchArea('Yeongdeungpo', 1, 50)
         .then((page) => {
-          console.log(page.data);
+          const markerArr = page.data.map((address) => new MarkerData(address));
+          return markerArr;
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
+          return;
         }),
   });
 
-  return { markersQuery };
+  return { markers: markersQuery.data };
 };
 
 export default useMarkers;
