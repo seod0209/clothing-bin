@@ -4,14 +4,12 @@ import styled from 'styled-components';
 
 import Theme from '@/styles/theme';
 
-import SearchAndMap from '../search-and-map';
-
-const MainContainer = styled.div`
+const GuideContainer = styled.div`
   ${Theme.common.flexCenter};
   width: 100%;
 `;
 
-const MainInner = styled.div`
+const GuideInner = styled.div`
   padding: 20px 16px;
   width: 1160px;
 
@@ -20,14 +18,12 @@ const MainInner = styled.div`
   }
 `;
 
-const Main: FC = () => {
+const Guide: FC = () => {
   return (
-    <MainContainer>
-      <MainInner>
-        <SearchAndMap />
-      </MainInner>
-    </MainContainer>
+    <GuideContainer>
+      <GuideInner>가이드요</GuideInner>
+    </GuideContainer>
   );
 };
 
-export default Main;
+export default Guide;

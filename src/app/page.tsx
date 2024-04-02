@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { ModalUIProvider } from '@/components/common/modal/context/ModalProvider';
 import Main from '@/components/main';
 

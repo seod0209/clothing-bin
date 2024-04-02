@@ -83,7 +83,6 @@ export function useMap() {
     });
 
     return () => {
-      initMap();
       naver.maps.Event.removeListener(zoom);
       naver.maps.Event.removeListener(dragend);
     };

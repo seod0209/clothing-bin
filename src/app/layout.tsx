@@ -5,6 +5,7 @@ import StyledComponentRegistry from '@/lib/styled-components-registry';
 import ReactQueryClientProvider from '@/lib/query-provider';
 
 import { Pretendard } from '@/styles/fonts';
+import GNB from '@/components/common/gnb';
 
 export const metadata: Metadata = {
   title: '옷체통',
@@ -32,6 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="ko">
         <body className={`${Pretendard.className}`}>
           <StyledComponentRegistry>
+            <header>
+              <GNB />
+            </header>
             <main>{children}</main>
             <Script
               strategy="beforeInteractive"
