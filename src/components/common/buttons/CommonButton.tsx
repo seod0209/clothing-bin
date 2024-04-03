@@ -18,11 +18,11 @@ const CommonButtonContainer = styled.button<{
   border: 2px solid;
 
   &:hover {
-    background-color: #ffffff33;
+    background-color: #c3db72;
   }
 
   &:active {
-    background-color: #00000033;
+    background-color: #afcf42;
   }
 
   &:disabled {
