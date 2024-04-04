@@ -21,7 +21,7 @@ const ThrowPageInner = styled.div`
 const ThrowPage: FC = () => {
   return (
     <ThrowPageContainer>
-      <ThrowPageInner>버려드림</ThrowPageInner>
+      <ThrowPageInner>서비스 준비중입니다.</ThrowPageInner>
     </ThrowPageContainer>
   );
 };

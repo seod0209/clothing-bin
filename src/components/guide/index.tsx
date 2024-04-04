@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { CategoryInfoList } from '@/api/clothing-categories';
 
 import Theme from '@/styles/theme';
-import CommonButton from '../common/buttons/CommonButton';
+import NestedList from '../common/list/NestedList';
 
 const GuideContainer = styled.div`
   ${Theme.common.flexCenter};
@@ -21,7 +21,15 @@ const GuideInner = styled.div`
   }
 `;
 
-const InfoContainer = styled.div``;
+const InfoContainer = styled.div`
+  align-items: flex-start;
+  width: 100%;
+`;
+
+const CollectableInfoContainer = styled.div`
+  align-items: flex-start;
+  width: 200px;
+`;
 
 const H2 = styled.div`
   display: flex;
@@ -39,10 +47,18 @@ const CategoriesContainer = styled.div`
   ${Theme.common.flexCenter};
   gap: 16px;
   flex-wrap: wrap;
-  padding-top: 10em;
+  padding-top: 16px;
   width: 100%;
+`;
+
+const CategoryInfo = styled.div`
+  ${Theme.common.flexCenter};
+  gap: 10em;
+  width: 100%;
+
   @media screen and (max-width: 768px) {
-    padding-top: 2em;
+    ${Theme.common.flexCenterColumn};
+    gap: 2em;
   }
 `;
 
@@ -74,7 +90,22 @@ const Guide: FC = () => {
         </InfoContainer>
         <CategoriesContainer>
           {CategoryInfoList.map((info) => (
-            <CommonButton style={{ width: 120, height: 120, fontSize: 20 }}> {info.name} </CommonButton>
+            <NestedList headerName={info.name}>
+              <CategoryInfo>
+                <CollectableInfoContainer>
+                  <H2>가능 품목</H2>
+                  {info.collectable.map((c) => (
+                    <Content>{c}</Content>
+                  ))}
+                </CollectableInfoContainer>
+                <CollectableInfoContainer>
+                  <H2 style={{ color: 'orange' }}>불가능 품목</H2>
+                  {info.not_collectable.map((not) => (
+                    <Content>{not}</Content>
+                  ))}
+                </CollectableInfoContainer>
+              </CategoryInfo>
+            </NestedList>
           ))}
         </CategoriesContainer>
       </GuideInner>

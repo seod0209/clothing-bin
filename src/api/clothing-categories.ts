@@ -4,7 +4,7 @@ import { CategoryInfo } from './type.d';
 const Clothes: CategoryInfo = {
   type: 'Clothes',
   name: '의류',
-  collectable: [''],
+  collectable: ['옷, 셔츠', '바지', '원피스', '자켓 등', '과 같이 사람이 입는 모든 종류의 의류'],
   not_collectable: [
     '찢어지거나 훼손된 의류',
     '오물 또는 이물질이 뭍은 세탁하지 않은 제품',
