@@ -1,6 +1,6 @@
 // https://github.com/yarnpkg/yarn/issues/5500#issuecomment-1409763038
 
-# Dotenv handling for Twinit
+# Dotenv handling for Clothing bin
 
 ## Usage
 
@@ -11,13 +11,37 @@ Setup a `.env` file in the root of your project.
 2. Add a version and a base url to use server.
 
 ```jsx
-VERSION = '';
-BASE_URL = '';
+## Clothing bin application info
+
+NEXT_PUBLIC_APPLICATION_NAME=clothing_bin
+NEXT_PUBLIC_VERSION=0.1.0
+
+## Naver map API
+## https://console.ncloud.com/naver-service/application
+
+NEXT_PUBLIC_NAVER_CLIENT_ID=get client id from your application anthentication info in naver map
+
+
+
+## Kakao map API
+## https://developers.kakao.com/console/app/769825
+
+NEXT_PUBLIC_KAKAOMAP_APPKEY=get javascript key from your application anthentication info in kakao developers
+
+
+## Government Open api
+## https://www.data.go.kr/iim/main/mypageMain.do
+
+NEXT_PUBLIC_GO_DATA_BASE_URL=https://api.odcloud.kr/api
+NEXT_PUBLIC_GO_DATA_ENCODING_KEY=
+NEXT_PUBLIC_GO_DATA_DECODING_KEY=
 ```
 
 3. Add NEXT_PUBLIC_KAKAOMAP_APPKEY
 
-## use Https
+## Use Https
+ You need to set https when you test on local environment. Naver and Kakao API request HTTPS.
+If you use HTTP to use thier APIs, you meet CORS error.
 
 ### Setting up the Key File
 
