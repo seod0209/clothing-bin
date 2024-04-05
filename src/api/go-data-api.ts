@@ -32,7 +32,7 @@ const SeoulAreas = {
 };
 export const fetchArea = async (area: SeoulGuType, page: number, perPage: number) => {
   const resp = await API.get<PageDto<AddressDto>>(SeoulAreas[area], {
-    params: { page, perPage, serviceKey: process.env.NEXT_PUBLIC_GO_DATA_ENCODING_KEY },
+    params: { page, perPage, serviceKey: process.env.NEXT_PUBLIC_GO_DATA_DECODING_KEY },
   });
 
   return resp.data;

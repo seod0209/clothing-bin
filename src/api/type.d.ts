@@ -117,3 +117,12 @@ export type SeoulGuType =
   | 'Gangnam'
   | 'Songpa'
   | 'Gangdong';
+
+export type CategoryType = 'Clothes' | 'Etc' | 'Bags' | 'Bedding' | 'Shoes';
+
+export interface CategoryInfo {
+  type: CategoryType;
+  name: string;
+  collectable: string[];
+  not_collectable: string[];
+}

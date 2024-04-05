@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     *, *:: after, *::before {
@@ -25,6 +25,7 @@ export const GlobalStyle = createGlobalStyle`
         min-width: 360px;
         }
     }
+
 
     ol, ul{
     list-style: none;
