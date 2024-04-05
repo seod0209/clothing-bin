@@ -1,4 +1,16 @@
 // https://github.com/yarnpkg/yarn/issues/5500#issuecomment-1409763038
+# Desciption
+- This project purpose to shows the placement of  the bin that collects recyclable clothing in Seoul
+- You know, it's harder than you thought to find a bin when you throw out recyclable clothing.
+- Search your address, you can find the addresses of the nearest clothing bins
+- You can get information about Seoul collectable clothes policy
+
+# Built with
+- node: v20.11.1
+- yarn: v3.6.4
+- typescript: 5.3.3
+- reactjs: v18.2.0
+- nextjs: v14.1.2
 
 # Dotenv handling for Clothing bin
 
