@@ -7,7 +7,7 @@ interface Coords {
   lat: number; // point.y
 }
 
-export function useMap() {
+export function useMap(currAddress?: string) {
   const CITY_HALL_COORD = { lat: 37.5666, lon: 126.9782 };
   const mapRef = useRef<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker | null>(null);
@@ -15,13 +15,14 @@ export function useMap() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
 
-  const { markers } = useMarkers();
+  const { markers } = useMarkers(currAddress);
   const { updateMarkers } = useMarker();
 
   // manage the map instance as 'state' to display markers in the exposed areas
   useEffect(() => {
     // Check current location by using geolocation.
     // If there is no agreement with sharing location, set default location.
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         if (pos) {

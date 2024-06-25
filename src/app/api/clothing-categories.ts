@@ -1,5 +1,5 @@
 // 상의
-import { CategoryInfo } from './type.d';
+import { CategoryInfo } from './type';
 
 const Clothes: CategoryInfo = {
   type: 'Clothes',

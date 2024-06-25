@@ -1,5 +1,5 @@
 'use client';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { useMap } from '@/hooks/useMap';
@@ -8,7 +8,6 @@ import Theme from '@/styles/theme';
 import SearchAddress from './SearchAddress';
 
 import Loader from '../common/Loader';
-import useMarkers from './use-markers';
 
 const SearchAndMapContainer = styled.div`
   ${Theme.common.flexCenterColumn};
@@ -44,8 +43,9 @@ const MapBox = styled.div`
 `;
 
 const SearchAndMap: FC = () => {
-  const { isLoading, handleAddressMarker } = useMap();
   const [currAddress, setCurrAddress] = useState<string>('');
+
+  const { isLoading, handleAddressMarker } = useMap(currAddress);
 
   const handleCurrentMarker = useCallback((address: string) => {
     setCurrAddress(address);
@@ -57,7 +57,7 @@ const SearchAndMap: FC = () => {
       <SearchAddress currAddress={currAddress} setCurrAddress={handleCurrentMarker} />
       <MarkersAndMapContainer>
         {isLoading && <Loader />}
-        <MapBox id="map"></MapBox>
+        <MapBox id="map" />
       </MarkersAndMapContainer>
     </SearchAndMapContainer>
   );

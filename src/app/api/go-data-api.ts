@@ -30,10 +30,22 @@ const SeoulAreas = {
   Songpa: '15127100/v1/uddi:be5bca9a-0dbd-4a2a-b262-d5d7d8a6a4b0',
   Gangdong: '',
 };
-export const fetchArea = async (area: SeoulGuType, page: number, perPage: number) => {
-  const resp = await API.get<PageDto<AddressDto>>(SeoulAreas[area], {
-    params: { page, perPage, serviceKey: process.env.NEXT_PUBLIC_GO_DATA_DECODING_KEY },
+
+export const fetchArea = async (area: SeoulGuType, perPage: number) => {
+  const req = Array.from({ length: 11 }, (_, idx) => {
+    return API.get<PageDto<AddressDto>>(SeoulAreas[area], {
+      params: { page: idx + 1, perPage, serviceKey: process.env.NEXT_PUBLIC_GO_DATA_DECODING_KEY },
+    });
+  });
+  const res = await Promise.all(req);
+  const result: AddressDto[] = [];
+  res.forEach(({ data }) => {
+    data.data.forEach((d) => {
+      if (d) {
+        result.push(d);
+      }
+    });
   });
 
-  return resp.data;
+  return result;
 };

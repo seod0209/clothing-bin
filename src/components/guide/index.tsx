@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { CategoryInfoList } from '@/api/clothing-categories';
+import { CategoryInfoList } from '@/app/api/clothing-categories';
 
 import Theme from '@/styles/theme';
 import NestedList from '../common/list/NestedList';

@@ -1,4 +1,4 @@
-import { AddressDto, SeoulGuType } from '@/api/type';
+import { AddressDto, SeoulGuType } from '@/app/api/type';
 
 export class MarkerData {
   x: number; // 위도 latitude
