@@ -12,84 +12,91 @@ export interface PageDto<T> {
   data: T[];
 }
 
-// 영등포구, 종로구, 금천구, 동대문구
-export interface AddressDto {
-  행정동: string;
-
-  도로명주소: string;
-
-  지번주소: string;
+export interface BasicDto {
+  연번?: number;
 
   위도: string;
 
   경도: string;
 
-  데이터기준일자: string;
+  데이터기준일자?: string;
+}
+
+export interface AddressDto {
+  gu: SeoulGuType;
+
+  lat: string; //위도
+
+  lon: string; //경도
+
+  fullAddress: string;
+}
+
+// 영등포구, 종로구, 금천구, 양천구, 중랑구, 서초구, 성북구
+interface AddressBasicInfo extends BasicDto {
+  행정동: string;
+
+  도로명주소: string;
+
+  지번주소: string;
+}
+
+// 동대문구
+
+interface DongDaeMoon extends BasicDto {
+  행정동: string;
+
+  주소: string;
+
+  상세주소: string;
 }
 
 // 송파구
-interface Songpa {
-  연번: number;
-  관리단체: string;
+interface Songpa extends BasicDto {
   행정동: string;
-  설치장소: string;
-}
 
-// 동작구, 양천구 Yangcheon
-interface Dongjak {
-  연번: number;
-  행정동: string;
-  주소: string;
-  데이터기준일자: string;
-}
-// 구로구, 광진구 //Gwangjin
-interface Guro {
-  행정동: string;
-  위치: string;
-  기준일자: string;
-}
-// 중랑구
-interface JoonRang {
-  연번: number;
-  행정동: string;
-  주소: string;
-  기준일자: string;
+  설치장소: string;
+
+  관리단체: string;
 }
 
 // 관악구
-interface Gwanak {
+interface Gwanak extends BasicDto {
   의류수거함: string;
+
   위치: string;
 }
 
-// 서대문구, 강서구
-interface GangSeo {
-  연번: number;
-  관리번호: string;
-  관리단체: string;
+// 서대문구
+interface SeoDaeMoon extends BasicDto {
   행정동: string;
+
   '설치장소(도로명)': string;
-}
-// 강남구
-interface Gangnam {
-  연번: number;
-  지번주소: string;
-  '도로명 주소': string;
-  기타: string;
-}
-// 성동구
-interface SeongDong {
-  순번: number;
+
   관리번호: string;
+
+  관리단체: string;
+}
+
+interface GangSeo extends BasicDto {
   행정동: string;
-  설치장소: string;
+
+  '설치장소(도로명주소)': string;
+
+  '설치장소(지번주소)': string;
+
+  관리번호: string;
+
+  관리단체: string;
 }
-// 성북구
-interface Seongbuk {
-  데이터기준일: string;
-  연번: number;
-  '의류수거함 위치': string;
+
+interface Gangnam extends BasicDto {
+  지번주소: string;
+
+  '도로명 주소': string;
 }
+
+export type SeoulGuAddressType = AddressBasicInfo | DongDaeMoon | Songpa | SeoDaeMoon | GangSeo | Gangnam;
 
 export type SeoulGuType =
   | 'Jongno'

@@ -6,10 +6,10 @@ export class MarkerData {
   address: string;
   gu: SeoulGuType | null;
   constructor(data?: AddressDto) {
-    this.x = data ? Number(data.위도) : 0;
-    this.y = data ? Number(data.경도) : 0;
-    this.address = data ? data.도로명주소 : '';
-    this.gu = data ? this.convertGuName(data.도로명주소) : null;
+    this.x = data ? Number(data.lat) : 0;
+    this.y = data ? Number(data.lon) : 0;
+    this.address = data ? data.fullAddress : '';
+    this.gu = data ? data.gu : null;
   }
   private convertGuName(address: string): SeoulGuType {
     const start = address.indexOf('서울특별시') + 5;
