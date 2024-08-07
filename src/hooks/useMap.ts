@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { useMarker } from './useMarker';
 import useMarkers from 'src/components/search-and-map/use-markers';
 
@@ -7,17 +8,20 @@ interface Coords {
   lat: number; // point.y
 }
 
+const characters = ['🐶', '🐱', '🐰', '🐻‍❄️', '🐨', '🐯', '🦁', '🐥', '🦄', '🍀'];
+
 export function useMap(currAddress?: string) {
   const CITY_HALL_COORD = { lat: 37.5666, lon: 126.9782 };
   const mapRef = useRef<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker | null>(null);
-  const markersRef = useRef<naver.maps.Marker[] | null>(null);
+  const markerListRef = useRef<naver.maps.Marker[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
 
   const { markers } = useMarkers(currAddress);
   const { updateMarkers } = useMarker();
 
+  const randomNum = Math.floor(Math.random() * 10);
   // manage the map instance as 'state' to display markers in the exposed areas
   useEffect(() => {
     // Check current location by using geolocation.
@@ -64,6 +68,15 @@ export function useMap(currAddress?: string) {
         markerRef.current = new naver.maps.Marker({
           position: new naver.maps.LatLng(myLocation.lat, myLocation.lon),
           map: mapRef.current,
+          icon: {
+            content: [`<div class="custom_marker" style="font-size:2.5em">${characters[randomNum]}<div/>`].join(''),
+            //마커의 크기 지정
+            size: new naver.maps.Size(38, 58),
+            //마커의 기준위치 지정
+            anchor: new naver.maps.Point(19, 58),
+          },
+
+          animation: naver.maps.Animation.BOUNCE,
         });
       }
 
@@ -73,13 +86,13 @@ export function useMap(currAddress?: string) {
 
     const zoom = naver.maps.Event.addListener(mapRef.current, 'zoom_changed', () => {
       if (mapRef.current !== null) {
-        updateMarkers(mapRef.current, [markerRef.current!, ...markersRef.current!]);
+        updateMarkers(mapRef.current, [markerRef.current!, ...markerListRef.current!]);
       }
     });
 
     const dragend = naver.maps.Event.addListener(mapRef.current, 'dragend', () => {
       if (mapRef.current !== null) {
-        updateMarkers(mapRef.current, [markerRef.current!, ...markersRef.current!]);
+        updateMarkers(mapRef.current, [markerRef.current!, ...markerListRef.current!]);
       }
     });
 
@@ -91,7 +104,7 @@ export function useMap(currAddress?: string) {
 
   useEffect(() => {
     if (markers) {
-      markersRef.current = markers.map((marker) => {
+      markerListRef.current = markers.map((marker) => {
         return new naver.maps.Marker({
           position: new naver.maps.LatLng(marker.x, marker.y),
           clickable: true,

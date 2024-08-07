@@ -1,7 +1,7 @@
 import { fetchArea } from '../../go-data-api';
 import { NextResponse } from 'next/server';
 
-// https://velog.io/@devdongwoo/Export-a-named-export-for-each-HTTP-method-instead.-%ED%95%B4%EA%B2%B0%EB%B2%95
+// https://stackoverflow.com/questions/76214029/no-http-methods-exported-in-export-a-named-export-for-each-http-method
 export async function GET() {
   const data = await fetchArea('Seocho', 50);
 
