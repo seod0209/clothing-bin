@@ -10,7 +10,7 @@ interface Coords {
 
 const characters = ['🐶', '🐱', '🐰', '🐻‍❄️', '🐨', '🐯', '🦁', '🐥', '🦄', '🍀'];
 
-export function useMap() {
+export function useMap(currAddress: string) {
   const CITY_HALL_COORD = { lat: 37.5666, lon: 126.9782 };
   const mapRef = useRef<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker | null>(null);
@@ -18,7 +18,9 @@ export function useMap() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
 
-  const { markers } = useMarkers();
+  // address가 변경될 때만 useMarkers 호출
+  const { markers } = useMarkers(currAddress);
+
   const { updateMarkers } = useMarker();
 
   const randomNum = Math.floor(Math.random() * 10);

@@ -45,7 +45,6 @@ export const fetchArea = async (area: SeoulGuType, perPage: number) => {
   const res = await Promise.all(req);
   const result: SeoulGuAddressType[] = [];
   res.forEach(({ data }) => {
-    console.log(area, data);
     data.data.forEach((d) => {
       if (d) {
         result.push(d);
