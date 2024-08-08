@@ -1,84 +1,91 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useMarker } from './useMarker';
 import useMarkers from 'src/components/search-and-map/use-markers';
 
+import { useMarker } from './useMarker';
+import { useIsMobile } from './useIsMobile';
+
 interface Coords {
-  lon: number; // point.x
-  lat: number; // point.y
+  lat: number; // point.x
+  lng: number; // point.y
 }
 
-const characters = ['🐶', '🐱', '🐰', '🐻‍❄️', '🐨', '🐯', '🦁', '🐥', '🦄', '🍀'];
+export function useMap(currAddress: string) {
+  const characters = ['🐶', '🐱', '🐰', '🐻‍❄️', '🐨', '🐯', '🦁', '🐥', '🦄', '🍀'];
+  const CITY_HALL_COORD = { lat: 37.5063, lng: 127.0093 };
 
-export function useMap() {
-  const CITY_HALL_COORD = { lat: 37.5666, lon: 126.9782 };
+  const isMobile = useIsMobile();
+
   const mapRef = useRef<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker | null>(null);
-  const markerListRef = useRef<naver.maps.Marker[] | null>(null);
+  const markerListRef = useRef<naver.maps.Marker[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [myLocation, setMyLocation] = useState<Coords>(CITY_HALL_COORD);
+  const [myLocation, setMyLocation] = useState<Coords | null>(null);
 
-  const { markers } = useMarkers();
+  const { markers } = useMarkers(currAddress);
+
   const { updateMarkers } = useMarker();
 
   const randomNum = Math.floor(Math.random() * 10);
-  // manage the map instance as 'state' to display markers in the exposed areas
+
   useEffect(() => {
     // Check current location by using geolocation.
     // If there is no agreement with sharing location, set default location.
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        if (pos) {
-          setMyLocation({
-            lat: pos.coords.latitude,
-            lon: pos.coords.longitude,
-          });
-        }
-      });
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          if (pos) {
+            setMyLocation({
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude,
+            });
+          }
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          // Handle error (e.g., show a default location or message)
+        },
+      );
     }
   }, []);
-
   useEffect(() => {
     const initMap = () => {
-      if (typeof myLocation !== 'string') {
-        // find current location
-        let currentPosision = [myLocation.lat, myLocation.lon];
+      // map options
+      const mapOptions: naver.maps.MapOptions = {
+        zoom: isMobile ? 16 : 15,
+        minZoom: 15,
+        maxZoom: 19,
+        zoomControl: true,
+        zoomControlOptions: {
+          style: naver.maps.ZoomControlStyle.SMALL,
+          position: naver.maps.Position.TOP_RIGHT,
+        },
+        mapDataControl: false,
+        scaleControl: false,
+      };
 
-        // map options
-        const mapOptions: naver.maps.MapOptions = {
-          zoom: 17,
-          minZoom: 15,
-          maxZoom: 19,
-          zoomControl: true,
-          zoomControlOptions: {
-            style: naver.maps.ZoomControlStyle.SMALL,
-            position: naver.maps.Position.TOP_RIGHT,
-          },
-          mapDataControl: false,
-          scaleControl: false,
-        };
+      // make Naver map
+      mapRef.current = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(CITY_HALL_COORD.lat, CITY_HALL_COORD.lng),
+        ...mapOptions,
+      });
 
-        // make Naver map
-        mapRef.current = new naver.maps.Map('map', {
-          center: new naver.maps.LatLng(currentPosision[0], currentPosision[1]),
-          ...mapOptions,
-        });
+      markerRef.current = new naver.maps.Marker({
+        position: new naver.maps.LatLng(CITY_HALL_COORD.lat, CITY_HALL_COORD.lng),
+        map: mapRef.current,
+        icon: {
+          content: [`<div class="custom_marker" style="font-size:2.5em">${characters[randomNum]}<div/>`].join(''),
+          // set marker size
+          size: new naver.maps.Size(38, 58),
+          // set marker location
+          anchor: new naver.maps.Point(19, 58),
+        },
 
-        markerRef.current = new naver.maps.Marker({
-          position: new naver.maps.LatLng(myLocation.lat, myLocation.lon),
-          map: mapRef.current,
-          icon: {
-            content: [`<div class="custom_marker" style="font-size:2.5em">${characters[randomNum]}<div/>`].join(''),
-            //마커의 크기 지정
-            size: new naver.maps.Size(38, 58),
-            //마커의 기준위치 지정
-            anchor: new naver.maps.Point(19, 58),
-          },
+        animation: naver.maps.Animation.BOUNCE,
+      });
 
-          animation: naver.maps.Animation.BOUNCE,
-        });
-      }
+      // custom button html
 
       setIsLoading(false);
     };
@@ -100,7 +107,7 @@ export function useMap() {
       naver.maps.Event.removeListener(zoom);
       naver.maps.Event.removeListener(dragend);
     };
-  }, [myLocation]);
+  }, []);
 
   useEffect(() => {
     if (markers) {
@@ -130,11 +137,21 @@ export function useMap() {
       const item = response.v2.addresses[0]; // 찾은 주소 정보
       const point = new naver.maps.Point(Number(item.x), Number(item.y)); // 지도에서 이동할 좌표
 
-      // 검색한 주소를 중심으로 지도 움직이기, marker 위치 변경.
+      // Move the map around the searched address, change the marker location.
       mapRef.current?.setCenter(point);
       markerRef.current?.setPosition(new naver.maps.LatLng(point.y, point.x));
     });
   }, []);
 
-  return { mapRef, isLoading, handleAddressMarker };
+  const handleCurrentLocation = useCallback(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const currentLocation = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        mapRef.current?.setCenter(currentLocation);
+        markerRef.current?.setPosition(new naver.maps.LatLng(currentLocation.y, currentLocation.x));
+      });
+    }
+  }, []);
+
+  return { isLoading, myLocation, handleAddressMarker, handleCurrentLocation };
 }

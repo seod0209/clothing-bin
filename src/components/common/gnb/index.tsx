@@ -3,16 +3,15 @@ import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { PiLockers } from 'react-icons/pi';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import theme from '@/styles/theme';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
 import TextButton from '../buttons/TextButton';
-import IconButton from '../buttons/IconButton';
 import { H1, H2 } from '../text';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/routes';
+import SideMenu from '../menu/SideMenu';
 
 const GNBContainer = styled.div`
   display: flex;
@@ -64,6 +63,12 @@ const GNB: FC = () => {
   const toGuide = useCallback(() => router.push(routes.guide), []);
   const toThrow = useCallback(() => router.push(routes.throw), []);
 
+  const listItems = [
+    { name: '이용 가이드', onClick: toGuide },
+    { name: '직접 버림', onClick: toMain },
+    { name: '버려 드림', onClick: toThrow },
+  ];
+
   return (
     <GNBContainer>
       <GNBInner>
@@ -73,21 +78,15 @@ const GNB: FC = () => {
         </LeftSideConatiner>
         {isMobile ? (
           <RightSideContainer>
-            <IconButton>
-              <AiOutlineMenu size={20} />
-            </IconButton>
+            <SideMenu items={listItems} />
           </RightSideContainer>
         ) : (
           <RightSideContainer>
-            <TextButton onClick={toGuide}>
-              <H2>이용 가이드</H2>
-            </TextButton>
-            <TextButton onClick={toMain}>
-              <H2>직접 버림</H2>
-            </TextButton>
-            <TextButton onClick={toThrow}>
-              <H2>버려 드림</H2>
-            </TextButton>
+            {listItems.map((item) => (
+              <TextButton onClick={item.onClick}>
+                <H2>{item.name}</H2>
+              </TextButton>
+            ))}
           </RightSideContainer>
         )}
       </GNBInner>

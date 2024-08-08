@@ -54,7 +54,7 @@ const SearchAddress: FC<SearchAddressProps> = ({ currAddress = undefined, setCur
   return (
     <SearchAddressContainer>
       <SearchOpenButton onClick={() => setOpenModal(true)}>
-        주소 찾기
+        주소를 입력해주세요🤓
         <TbMapPinSearch size={20} />
       </SearchOpenButton>
       <CurrentAddressText>현재 주소: {currAddress}</CurrentAddressText>
