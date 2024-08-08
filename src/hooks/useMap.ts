@@ -25,21 +25,6 @@ export function useMap(currAddress: string) {
 
   const randomNum = Math.floor(Math.random() * 10);
   // manage the map instance as 'state' to display markers in the exposed areas
-  useEffect(() => {
-    // Check current location by using geolocation.
-    // If there is no agreement with sharing location, set default location.
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        if (pos) {
-          setMyLocation({
-            lat: pos.coords.latitude,
-            lon: pos.coords.longitude,
-          });
-        }
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const initMap = () => {

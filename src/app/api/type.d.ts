@@ -34,6 +34,8 @@ export interface AddressDto {
 
 // 영등포구, 종로구, 금천구, 양천구, 중랑구, 서초구, 성북구
 interface AddressBasicInfo extends BasicDto {
+  type: 'AddressBasicInfo';
+
   행정동: string;
 
   도로명주소: string;
@@ -44,6 +46,8 @@ interface AddressBasicInfo extends BasicDto {
 // 동대문구
 
 interface DongDaeMoon extends BasicDto {
+  type: 'Dongdaemun';
+
   행정동: string;
 
   주소: string;
@@ -53,6 +57,8 @@ interface DongDaeMoon extends BasicDto {
 
 // 송파구
 interface Songpa extends BasicDto {
+  type: 'Songpa';
+
   행정동: string;
 
   설치장소: string;
@@ -62,6 +68,8 @@ interface Songpa extends BasicDto {
 
 // 관악구
 interface Gwanak extends BasicDto {
+  type: 'Gwanak';
+
   의류수거함: string;
 
   위치: string;
@@ -69,6 +77,8 @@ interface Gwanak extends BasicDto {
 
 // 서대문구
 interface SeoDaeMoon extends BasicDto {
+  type: 'Seodaemun';
+
   행정동: string;
 
   '설치장소(도로명)': string;
@@ -79,6 +89,8 @@ interface SeoDaeMoon extends BasicDto {
 }
 
 interface GangSeo extends BasicDto {
+  type: 'Gangseo';
+
   행정동: string;
 
   '설치장소(도로명주소)': string;
@@ -91,6 +103,7 @@ interface GangSeo extends BasicDto {
 }
 
 interface Gangnam extends BasicDto {
+  type: 'Gangnam';
   지번주소: string;
 
   '도로명 주소': string;
