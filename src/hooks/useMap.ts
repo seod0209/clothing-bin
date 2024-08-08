@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useMarker } from './useMarker';
 import useMarkers from 'src/components/search-and-map/use-markers';
+
+import { useMarker } from './useMarker';
+import { useIsMobile } from './useIsMobile';
 
 interface Coords {
   lat: number; // point.x
@@ -11,6 +13,8 @@ interface Coords {
 export function useMap(currAddress: string) {
   const characters = ['🐶', '🐱', '🐰', '🐻‍❄️', '🐨', '🐯', '🦁', '🐥', '🦄', '🍀'];
   const CITY_HALL_COORD = { lat: 37.5063, lng: 127.0093 };
+
+  const isMobile = useIsMobile();
 
   const mapRef = useRef<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker | null>(null);
@@ -27,7 +31,7 @@ export function useMap(currAddress: string) {
   useEffect(() => {
     // Check current location by using geolocation.
     // If there is no agreement with sharing location, set default location.
-    console.log(navigator);
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -49,7 +53,7 @@ export function useMap(currAddress: string) {
     const initMap = () => {
       // map options
       const mapOptions: naver.maps.MapOptions = {
-        zoom: 15,
+        zoom: isMobile ? 16 : 15,
         minZoom: 15,
         maxZoom: 19,
         zoomControl: true,
