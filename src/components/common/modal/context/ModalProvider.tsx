@@ -1,5 +1,6 @@
-'use client'
-import React, { PropsWithChildren, createContext, useState } from "react";
+'use client';
+
+import React, { PropsWithChildren, createContext, useMemo, useState } from 'react';
 
 // Define the type for the context value
 type ModalUIContextType = {
@@ -8,23 +9,24 @@ type ModalUIContextType = {
 };
 
 // Create the context
-export const ModalUIContext = createContext<ModalUIContextType >({} as ModalUIContextType) ;
+export const ModalUIContext = createContext<ModalUIContextType>({} as ModalUIContextType);
 
 // Context Wrapper component
-export const ModalUIProvider: React.FC<PropsWithChildren> = ({ children=undefined }) => {
+export const ModalUIProvider: React.FC<PropsWithChildren> = ({ children = undefined }) => {
   // State to manage the modal's open/close state
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   // Create the context value
-  const contextValue: ModalUIContextType = {
-    openModal,
-    setOpenModal,
-  };
+  const contextValue: ModalUIContextType = useMemo(
+    () => ({
+      openModal,
+      setOpenModal,
+    }),
+    [openModal, setOpenModal],
+  );
 
   return (
     // Provide the context value to the children
-    <ModalUIContext.Provider value={contextValue}>
-      {children}
-    </ModalUIContext.Provider>
+    <ModalUIContext.Provider value={contextValue}>{children}</ModalUIContext.Provider>
   );
 };

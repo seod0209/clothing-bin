@@ -2,7 +2,6 @@ import React, { useRef, useContext, PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
-//context
 import { ModalUIContext } from './context/ModalProvider';
 
 const ModalBackground = styled.div`

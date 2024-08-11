@@ -2,9 +2,13 @@ import { AddressDto, SeoulGuType } from '@/app/api/type';
 
 export class MarkerData {
   lat: number; // 위도 latitude
+
   lng: number; // 경도 longitude
+
   address: string;
+
   gu: SeoulGuType | null;
+
   constructor(data?: AddressDto) {
     this.lat = data ? data.lat : 0;
     this.lng = data ? data.lng : 0;

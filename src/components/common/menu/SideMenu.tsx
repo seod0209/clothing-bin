@@ -1,14 +1,13 @@
 'use client';
-import React, { FC, useCallback, useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
 
+import React, { FC, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import styled from 'styled-components';
 
 import theme from '@/styles/theme';
 
 import TextButton from '../buttons/TextButton';
 import IconButton from '../buttons/IconButton';
-import { useIsMobile } from '../../../hooks/useIsMobile';
 
 const SideMenuContainer = styled.div`
   ${theme.common.flexCenter}

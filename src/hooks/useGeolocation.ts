@@ -28,9 +28,9 @@ export function useGeolocation() {
                 { coords: new naver.maps.LatLng(pos.coords.latitude, pos.coords.longitude) },
                 (status, res) => {
                   if (status !== naver.maps.Service.Status.OK) {
-                    return alert('Somthing wrong');
+                    void alert('Somthing wrong');
                   }
-                  let item = res.v2.address;
+                  const item = res.v2.address;
 
                   setAddress(item.roadAddress ? item.roadAddress : item.jibunAddress);
                 },
@@ -43,7 +43,7 @@ export function useGeolocation() {
         },
       );
     }
-  }, []);
+  }, [address]);
 
   return { location, address };
 }

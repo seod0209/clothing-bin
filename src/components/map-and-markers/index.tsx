@@ -1,4 +1,5 @@
 'use client';
+
 import React, { FC, lazy, Suspense, useCallback } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
@@ -17,7 +18,7 @@ interface MapAndMarkersProps {
 }
 
 const MapAndMarkers: FC<MapAndMarkersProps> = ({ searchedAddress, setSearchedAddress }) => {
-  const { location, address } = useGeolocation();
+  const { location } = useGeolocation();
 
   const { mapRef } = useMap(searchedAddress, location.lat, location.lng);
 
@@ -26,7 +27,7 @@ const MapAndMarkers: FC<MapAndMarkersProps> = ({ searchedAddress, setSearchedAdd
       mapRef.current?.setCurrentLocation(location.lat, location.lng);
       setSearchedAddress('');
     }
-  }, [location, mapRef]);
+  }, [location, mapRef, setSearchedAddress]);
 
   return (
     <Suspense fallback={<Loader />}>

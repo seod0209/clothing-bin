@@ -14,7 +14,7 @@ export class NaverMapService implements MapService {
   initializeMap(containerId: string, options: naver.maps.MapOptions): void {
     this.map = new naver.maps.Map(containerId, options);
 
-    this.markerCharacter = charactors[Math.floor(Math.random() * charactors.length)];
+    this.markerCharacter = charactors[Math.floor(Math.random() * charactors.length)] ?? '🐰';
   }
 
   setCenter(lat: number, lng: number): void {
@@ -80,10 +80,11 @@ export class NaverMapService implements MapService {
       }
 
       const item = res.v2.addresses[0];
-      const lat = Number(item.y);
-      const lng = Number(item.x);
-
-      callback({ lat, lng });
+      if (item) {
+        const lat = Number(item.y);
+        const lng = Number(item.x);
+        callback({ lat, lng });
+      }
     });
   }
 

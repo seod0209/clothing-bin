@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { NaverMapService } from '@/lib/map/naver-map-service';
 
@@ -8,7 +8,7 @@ import { useMarker } from './useMarker';
 import { useMarkers } from './useMarkers';
 
 export function useMap(searchedAddress: string, lat: number, lng: number) {
-  const mapService = new NaverMapService();
+  const mapService = useMemo(() => new NaverMapService(), []);
 
   const isMobile = useIsMobile();
 
@@ -57,20 +57,20 @@ export function useMap(searchedAddress: string, lat: number, lng: number) {
 
     const zoom = mapService.addZoomListener(() => {
       if (mapRef.current) {
-        updateMarkers(map, mapService.getMarkers());
+        void updateMarkers(map, mapService.getMarkers());
       }
     });
 
     const drag = mapService.addDragendListener(() => {
       if (mapRef.current) {
-        updateMarkers(map, mapService.getMarkers());
+        void updateMarkers(map, mapService.getMarkers());
       }
     });
     return () => {
       mapService.removeListener(zoom);
       mapService.removeListener(drag);
     };
-  }, [mapService, updateMarkers]);
+  }, [mapRef, mapService, updateMarkers]);
 
   return { mapRef };
 }

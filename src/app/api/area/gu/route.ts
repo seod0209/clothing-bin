@@ -1,7 +1,8 @@
-import { fetchArea } from '../../fetch-area';
 import { NextRequest, NextResponse } from 'next/server';
-import { SeoulGuType } from '../../type';
 import { ApiError } from 'next/dist/server/api-utils';
+
+import { fetchArea } from '../../fetch-area';
+import { SeoulGuType } from '../../type';
 
 // https://stackoverflow.com/questions/76214029/no-http-methods-exported-in-export-a-named-export-for-each-http-method
 export async function GET(req: NextRequest) {

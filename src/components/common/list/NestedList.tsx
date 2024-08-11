@@ -1,7 +1,6 @@
-import { FC, type ButtonHTMLAttributes, PropsWithChildren, useMemo, useState, ReactNode, ReactElement } from 'react';
-import styled from 'styled-components';
-
+import { FC, type ButtonHTMLAttributes, PropsWithChildren, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import styled from 'styled-components';
 
 import Theme from '@/styles/theme';
 

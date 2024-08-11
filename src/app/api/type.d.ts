@@ -25,9 +25,9 @@ export interface BasicDto {
 export interface AddressDto {
   gu: SeoulGuType;
 
-  lat: number; //위도
+  lat: number; // 위도
 
-  lng: number; //경도
+  lng: number; // 경도
 
   fullAddress: string;
 }
