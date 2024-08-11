@@ -10,6 +10,12 @@ import GNB from '@/components/common/gnb';
 export const metadata: Metadata = {
   title: '옷체통',
   description: '서울시 헌옷 수거함 위치 정보 표시',
+  verification: {
+    google: 'UpcNcYqthSmZULOUf38J0t5w1Ede2tsXexbMikR5eoQ',
+    other: {
+      'naver-site-verification': '388bc2abab53cfe3c86d7214154c3c4b4f95687b',
+    },
+  },
 };
 
 export const viewport: Viewport = {

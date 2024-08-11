@@ -83,7 +83,7 @@ const GNB: FC = () => {
         ) : (
           <RightSideContainer>
             {listItems.map((item) => (
-              <TextButton onClick={item.onClick}>
+              <TextButton key={`${item.name}_DE`} onClick={item.onClick}>
                 <H2>{item.name}</H2>
               </TextButton>
             ))}
