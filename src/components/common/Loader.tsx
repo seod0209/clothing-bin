@@ -1,8 +1,7 @@
-'use client';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const LoadingContainer = styled.div`
+const LoaderContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -14,7 +13,7 @@ const LoadingContainer = styled.div`
   z-index: 20;
 `;
 
-const SpinLoading = styled.div`
+const SpinLoader = styled.div`
   width: 50px;
   height: 50px;
   margin: 10px auto;
@@ -35,10 +34,10 @@ const SpinLoading = styled.div`
   }
 `;
 
-const Loading: FC = () => (
-  <LoadingContainer>
-    <SpinLoading className="loading_circle" />
-  </LoadingContainer>
+const Loader: FC = () => (
+  <LoaderContainer>
+    <SpinLoader className="loader_circle" />
+  </LoaderContainer>
 );
 
-export default Loading;
+export default Loader;

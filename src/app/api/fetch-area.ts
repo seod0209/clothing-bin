@@ -80,8 +80,8 @@ export const fetchArea = async (area: SeoulGuType, perPage: number) => {
         if (d) {
           let converted: AddressDto = {
             gu: area,
-            lat: d.위도,
-            lon: d.경도,
+            lat: Number(d.위도),
+            lng: Number(d.경도),
             fullAddress: getFullAddress(d) ?? '-',
           };
           result.push(converted);

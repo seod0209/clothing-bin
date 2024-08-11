@@ -6,6 +6,7 @@ import { useIsMobile } from './useIsMobile';
 import { useGeolocation } from './useGeolocation';
 import { useMapInitialization } from './useMapInitialization';
 import { useMarker } from './useMarker';
+import useMarkers from './useMarkers';
 
 export function useMap(currAddress?: string) {
   const mapService = new NaverMapService();
@@ -59,6 +60,11 @@ export function useMap(currAddress?: string) {
 
   useEffect(() => {
     if (currAddress) {
+      const { markers } = useMarkers(currAddress);
+      if (markers) {
+        mapService.setMarkers(markers);
+      }
+
       mapService.geocode(currAddress, (pos) => {
         mapService.setCurrentLocation(pos.lat, pos.lng);
       });
@@ -71,7 +77,7 @@ export function useMap(currAddress?: string) {
         mapService.setCurrentLocation(position.coords.latitude, position.coords.longitude);
       });
     }
-  }, []);
+  }, [mapService]);
 
   return { mapRef, handleCurrentLocation };
 }

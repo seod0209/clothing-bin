@@ -1,5 +1,5 @@
 'use client';
-import { Suspense, lazy, useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 import { ModalUIProvider } from '@/components/common/modal/context/ModalProvider';
@@ -13,9 +13,6 @@ const MapAndMarkers = dynamic(() => import('@/components/map-and-markers'), {
   ssr: false, // 따라서, 서버 사이드 렌더링을 비활성화
 });
 
-// Lazy load components
-const Loading = lazy(() => import('./loading'));
-
 // https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#step-4-migrating-pages
 export default function Page() {
   const [currAddress, setCurrAddress] = useState<string>('');
@@ -24,9 +21,7 @@ export default function Page() {
     <ModalUIProvider>
       <Main>
         <SearchAddress currAddress={currAddress} setCurrAddress={setCurrAddress} />
-        <Suspense fallback={<Loading />}>
-          <MapAndMarkers currAddress={currAddress} />
-        </Suspense>
+        <MapAndMarkers currAddress={currAddress} />
       </Main>
     </ModalUIProvider>
   );

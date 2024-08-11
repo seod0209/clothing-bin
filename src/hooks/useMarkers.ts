@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { MarkerData } from './type';
+import { MarkerData } from '@/lib/map/map-service';
 import searchGu from '@/utils/searchGu';
 import { AddressDto, SeoulGuType } from '@/app/api/type';
 import { useCallback } from 'react';

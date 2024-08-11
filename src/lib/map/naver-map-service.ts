@@ -1,4 +1,4 @@
-import { MapService } from './map-service';
+import { MapService, MarkerData } from './map-service';
 
 const charactors = ['🐶', '🐱', '🐰', '🐻‍❄️', '🐨', '🐯', '🦁', '🐥', '🦄', '🍀'];
 
@@ -45,7 +45,7 @@ export class NaverMapService implements MapService {
     }
   }
 
-  setMarkers(markerData: { lat: number; lng: number; address: string }[]) {
+  setMarkers(markerData: MarkerData[]) {
     // clear previous markers
     this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
