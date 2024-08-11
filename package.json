@@ -29,7 +29,8 @@
     "sharp": "^0.32.6",
     "styled-components": "^6.1.8",
     "swr": "^2.2.0",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "vite": "^5.4.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.1",
