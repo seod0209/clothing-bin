@@ -19,12 +19,12 @@ const SideMenuContainer = styled.div`
   width: 100%;
 `;
 
-const ListContainer = styled.div<{ isopen: boolean }>`
+const ListContainer = styled.div<{ $isopen: string }>`
   position: absolute;
   top: 5%;
   right: 16px;
 
-  visibility: ${({ isopen }) => (isopen ? 'visible' : 'hidden')};
+  visibility: ${({ $isopen }) => ($isopen === 'true' ? 'visible' : 'hidden')};
 
   width: 50%;
 
@@ -60,9 +60,10 @@ const SideMenu: FC<SideMenuProps> = ({ items }) => {
       <IconButton onClick={() => setIsOpen(!isOpen)}>
         <AiOutlineMenu size={20} />
       </IconButton>
-      <ListContainer id="list-container" isopen={isOpen}>
+      <ListContainer id="list-container" $isopen={String(isOpen)}>
         {items.map((item) => (
           <TextButton
+            key={item.name}
             onClick={() => {
               setIsOpen(false);
               item.onClick();
