@@ -1,19 +1,19 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { NaverMapService } from '@/lib/map/naver-map-service';
 
 import { useIsMobile } from './useIsMobile';
-import { useGeolocation } from './useGeolocation';
 import { useMapInitialization } from './useMapInitialization';
 import { useMarker } from './useMarker';
-import useMarkers from './useMarkers';
+import { useMarkers } from './useMarkers';
 
-export function useMap(currAddress?: string) {
+export function useMap(searchedAddress: string, lat: number, lng: number) {
   const mapService = new NaverMapService();
 
   const isMobile = useIsMobile();
-  const { lat, lng } = useGeolocation() || { lat: 37.5063, lng: 127.0093 };
+
   const { updateMarkers } = useMarker();
+  const { markers } = useMarkers(searchedAddress);
 
   const mapRef = useMapInitialization({
     mapService,
@@ -38,6 +38,20 @@ export function useMap(currAddress?: string) {
   }, [lat, lng, mapService]);
 
   useEffect(() => {
+    if (markers) {
+      mapService.setMarkers(markers);
+    }
+  }, [markers, mapService]);
+
+  useEffect(() => {
+    if (searchedAddress) {
+      mapService.geocode(searchedAddress, (pos) => {
+        mapService.setCurrentLocation(pos.lat, pos.lng);
+      });
+    }
+  }, [searchedAddress, mapService]);
+
+  useEffect(() => {
     const map = mapService.getMap();
     if (!map) return;
 
@@ -58,26 +72,5 @@ export function useMap(currAddress?: string) {
     };
   }, [mapService, updateMarkers]);
 
-  useEffect(() => {
-    if (currAddress) {
-      const { markers } = useMarkers(currAddress);
-      if (markers) {
-        mapService.setMarkers(markers);
-      }
-
-      mapService.geocode(currAddress, (pos) => {
-        mapService.setCurrentLocation(pos.lat, pos.lng);
-      });
-    }
-  }, [currAddress, mapService]);
-
-  const handleCurrentLocation = useCallback(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        mapService.setCurrentLocation(position.coords.latitude, position.coords.longitude);
-      });
-    }
-  }, [mapService]);
-
-  return { mapRef, handleCurrentLocation };
+  return { mapRef };
 }

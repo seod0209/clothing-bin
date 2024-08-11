@@ -4,7 +4,7 @@ import searchGu from '@/utils/searchGu';
 import { AddressDto, SeoulGuType } from '@/app/api/type';
 import { useCallback } from 'react';
 
-const useMarkers = (currAddress?: string) => {
+export function useMarkers(currAddress?: string) {
   const gu: SeoulGuType | null = currAddress ? searchGu(currAddress) : 'Seocho';
 
   const fetchMarkers = useCallback(async (gu: SeoulGuType) => {
@@ -45,6 +45,4 @@ const useMarkers = (currAddress?: string) => {
   });
 
   return { markers: markersQuery.data, isLoading: markersQuery.isLoading, error: markersQuery.error };
-};
-
-export default useMarkers;
+}

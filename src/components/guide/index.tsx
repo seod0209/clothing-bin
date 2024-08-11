@@ -90,7 +90,7 @@ const Guide: FC = () => {
         </InfoContainer>
         <CategoriesContainer>
           {CategoryInfoList.map((info) => (
-            <NestedList headerName={info.name}>
+            <NestedList key={info.name} headerName={info.name}>
               <CategoryInfo>
                 <CollectableInfoContainer>
                   <H2>가능 품목</H2>

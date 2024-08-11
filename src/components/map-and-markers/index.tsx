@@ -1,19 +1,32 @@
 'use client';
-import React, { FC, lazy, Suspense } from 'react';
+import React, { FC, lazy, Suspense, useCallback } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { useMap } from '@/hooks/useMap';
+import { useGeolocation } from '@/hooks/useGeolocation';
+
 import { MarkersAndMapContainer, MapBox, Location } from './style';
 
 // Lazy load components
 const Loader = lazy(() => import('../common/Loader'));
 
 interface MapAndMarkersProps {
-  currAddress?: string;
+  searchedAddress: string;
+
+  setSearchedAddress: (adr: string) => void;
 }
 
-const MapAndMarkers: FC<MapAndMarkersProps> = ({ currAddress }) => {
-  const { mapRef, handleCurrentLocation } = useMap(currAddress);
+const MapAndMarkers: FC<MapAndMarkersProps> = ({ searchedAddress, setSearchedAddress }) => {
+  const { location, address } = useGeolocation();
+
+  const { mapRef } = useMap(searchedAddress, location.lat, location.lng);
+
+  const handleCurrentLocation = useCallback(() => {
+    if (location) {
+      mapRef.current?.setCurrentLocation(location.lat, location.lng);
+      setSearchedAddress('');
+    }
+  }, [location, mapRef]);
 
   return (
     <Suspense fallback={<Loader />}>

@@ -15,13 +15,14 @@ const MapAndMarkers = dynamic(() => import('@/components/map-and-markers'), {
 
 // https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration#step-4-migrating-pages
 export default function Page() {
-  const [currAddress, setCurrAddress] = useState<string>('');
+  // XXX: 전역관리고 수정 필요
+  const [searchedAddress, setSearchedAddress] = useState<string>('');
 
   return (
     <ModalUIProvider>
       <Main>
-        <SearchAddress currAddress={currAddress} setCurrAddress={setCurrAddress} />
-        <MapAndMarkers currAddress={currAddress} />
+        <SearchAddress searchedAddress={searchedAddress} setSearchedAddress={setSearchedAddress} />
+        <MapAndMarkers searchedAddress={searchedAddress} setSearchedAddress={setSearchedAddress} />
       </Main>
     </ModalUIProvider>
   );

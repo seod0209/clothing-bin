@@ -46,9 +46,8 @@ export class NaverMapService implements MapService {
   }
 
   setMarkers(markerData: MarkerData[]) {
-    // clear previous markers
+    // 기존 마커 제거
     this.markers.forEach((marker) => marker.setMap(null));
-    this.markers = [];
 
     this.markers = markerData.map((data) => {
       return new naver.maps.Marker({
@@ -61,8 +60,8 @@ export class NaverMapService implements MapService {
   }
 
   setCurrentLocation(lat: number, lng: number) {
-    this.setCenter(lat, lng);
     this.setMarker(lat, lng);
+    this.setCenter(lat, lng);
   }
 
   getMap() {
@@ -75,7 +74,7 @@ export class NaverMapService implements MapService {
 
   geocode(address: string, callback: (pos: { lat: number; lng: number }) => void) {
     naver.maps.Service.geocode({ query: address }, (status, res) => {
-      if (status === naver.maps.Service.Status.ERROR || res.v2.meta.totalCount) {
+      if (status === naver.maps.Service.Status.ERROR || !res.v2.meta.totalCount) {
         console.error('Error in geocode:', status);
         return;
       }
