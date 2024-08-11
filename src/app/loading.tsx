@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const LoaderContainer = styled.div`
+const LoadingContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@ const LoaderContainer = styled.div`
   z-index: 20;
 `;
 
-const SpinLoader = styled.div`
+const SpinLoading = styled.div`
   width: 50px;
   height: 50px;
   margin: 10px auto;
@@ -34,10 +34,10 @@ const SpinLoader = styled.div`
   }
 `;
 
-const Loader: FC = () => (
-  <LoaderContainer>
-    <SpinLoader className="loading_circle" />
-  </LoaderContainer>
+const Loading: FC = () => (
+  <LoadingContainer>
+    <SpinLoading className="loading_circle" />
+  </LoadingContainer>
 );
 
-export default Loader;
+export default Loading;

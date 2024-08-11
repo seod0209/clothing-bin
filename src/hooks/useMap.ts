@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import useMarkers from 'src/components/search-and-map/use-markers';
+import useMarkers from '@/components/map-and-markers/use-markers';
 
 import { useMarker } from './useMarker';
 import { useIsMobile } from './useIsMobile';
