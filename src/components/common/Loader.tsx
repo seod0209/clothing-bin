@@ -36,7 +36,7 @@ const SpinLoader = styled.div`
 
 const Loader: FC = () => (
   <LoaderContainer>
-    <SpinLoader className="loading_circle" />
+    <SpinLoader className="loader_circle" />
   </LoaderContainer>
 );
 

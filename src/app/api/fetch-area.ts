@@ -78,10 +78,10 @@ export const fetchArea = async (area: SeoulGuType, perPage: number) => {
     res.forEach(({ data }) => {
       data.data.forEach((d) => {
         if (d) {
-          let converted: AddressDto = {
+          const converted: AddressDto = {
             gu: area,
-            lat: d.위도,
-            lon: d.경도,
+            lat: Number(d.위도),
+            lng: Number(d.경도),
             fullAddress: getFullAddress(d) ?? '-',
           };
           result.push(converted);
@@ -98,7 +98,7 @@ export const fetchArea = async (area: SeoulGuType, perPage: number) => {
 function getFullAddress(data: SeoulGuAddressType) {
   switch (data.type) {
     case 'Dongdaemun':
-      return data.주소 + ' ' + data.상세주소;
+      return `${data.주소} ${data.상세주소}`;
 
     case 'Seodaemun':
       return data['설치장소(도로명)'];

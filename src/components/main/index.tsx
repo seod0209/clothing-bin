@@ -1,10 +1,9 @@
 'use client';
-import React, { FC } from 'react';
+
+import React, { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import Theme from '@/styles/theme';
-
-import SearchAndMap from '../search-and-map';
 
 const MainContainer = styled.div`
   ${Theme.common.flexCenter};
@@ -20,11 +19,23 @@ const MainInner = styled.div`
   }
 `;
 
-const Main: FC = () => {
+const SearchAndMapContainer = styled.div`
+  ${Theme.common.flexCenterColumn};
+  gap: 16px;
+  padding: 20px 16px;
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 8px 0;
+  }
+`;
+
+const Main: FC<PropsWithChildren> = ({ children }) => {
   return (
     <MainContainer>
       <MainInner>
-        <SearchAndMap />
+        <SearchAndMapContainer>{children}</SearchAndMapContainer>
       </MainInner>
     </MainContainer>
   );

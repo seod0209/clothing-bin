@@ -1,17 +1,19 @@
 'use client';
+
 import React, { FC, useCallback } from 'react';
-import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 
 import { PiLockers } from 'react-icons/pi';
+import styled from 'styled-components';
 
 import theme from '@/styles/theme';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
-import TextButton from '../buttons/TextButton';
-import { H1, H2 } from '../text';
-import { useRouter } from 'next/navigation';
 import { routes } from '@/routes';
+
+import TextButton from '../buttons/TextButton';
 import SideMenu from '../menu/SideMenu';
+import { H1, H2 } from '../text';
 
 const GNBContainer = styled.div`
   display: flex;
@@ -59,9 +61,9 @@ const GNB: FC = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
 
-  const toMain = useCallback(() => router.push(routes.main), []);
-  const toGuide = useCallback(() => router.push(routes.guide), []);
-  const toThrow = useCallback(() => router.push(routes.throw), []);
+  const toMain = useCallback(() => router.push(routes.main), [router]);
+  const toGuide = useCallback(() => router.push(routes.guide), [router]);
+  const toThrow = useCallback(() => router.push(routes.throw), [router]);
 
   const listItems = [
     { name: '이용 가이드', onClick: toGuide },

@@ -1,4 +1,5 @@
 'use client';
+
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
@@ -85,12 +86,13 @@ const Guide: FC = () => {
           </Content>
           <Content>봉제공장에서 절단된 자투리천이나 지저분한 옷,착용이 불가능한 옷은 재활용 불가</Content>
           <Content>
-            '오물 또는 이물질이 뭍은 세탁하지 않은 제품'은 넣지 말아주세요. 재사용가능한 다른 의류들까지 불가능하게됩니다.
+            &apos;오물 또는 이물질이 뭍은 세탁하지 않은 제품&apos;은 넣지 말아주세요. 재사용가능한 다른 의류들까지
+            불가능하게됩니다.
           </Content>
         </InfoContainer>
         <CategoriesContainer>
           {CategoryInfoList.map((info) => (
-            <NestedList headerName={info.name}>
+            <NestedList key={info.name} headerName={info.name}>
               <CategoryInfo>
                 <CollectableInfoContainer>
                   <H2>가능 품목</H2>

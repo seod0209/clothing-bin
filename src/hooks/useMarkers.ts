@@ -1,21 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
-import { MarkerData } from './type';
-import searchGu from '@/utils/searchGu';
-import { AddressDto, SeoulGuType } from '@/app/api/type';
 import { useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { MarkerData } from '@/lib/map/map-service';
 
-const useMarkers = (currAddress?: string) => {
+import { AddressDto, SeoulGuType } from '@/app/api/type';
+import searchGu from '@/utils/searchGu';
+
+export function useMarkers(currAddress?: string) {
   const gu: SeoulGuType | null = currAddress ? searchGu(currAddress) : 'Seocho';
 
-  const fetchMarkers = useCallback(async (gu: SeoulGuType) => {
+  const fetchMarkers = useCallback(async (guType: SeoulGuType) => {
     try {
-      const res = await fetch(`/api/area/gu?type=${encodeURIComponent(gu)}`);
+      const res = await fetch(`/api/area/gu?type=${encodeURIComponent(guType)}`);
 
       // 응답 상태 코드 확인
       if (!res.ok) {
         switch (res.status) {
           case 400:
-            alert(`해당 지역(${gu})의 URL이 설정되어 있지 않습니다.`);
+            alert(`해당 지역(${guType})의 URL이 설정되어 있지 않습니다.`);
             throw new Error(`HTTP error! status: ${res.status}`);
           case 403:
             alert('API 키가 설정되지 않았습니다. 환경 변수를 확인하세요.');
@@ -45,6 +46,4 @@ const useMarkers = (currAddress?: string) => {
   });
 
   return { markers: markersQuery.data, isLoading: markersQuery.isLoading, error: markersQuery.error };
-};
-
-export default useMarkers;
+}

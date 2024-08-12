@@ -1,1 +1,4 @@
-{}
+{
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
+  "eslint.alwaysShowStatus": true
+}

@@ -14,6 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedIndexedAccess": true,
+    "declaration": true,
+    "downlevelIteration": true,
     "plugins": [
       {
         "name": "next"
@@ -24,6 +29,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src", "build/types/**/*.ts", "custom.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src", "build/types/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

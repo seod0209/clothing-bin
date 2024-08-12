@@ -1,6 +1,6 @@
-import { FC, type ButtonHTMLAttributes } from "react";
+import { FC, type ButtonHTMLAttributes } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const TextButtonContainer = styled.button`
   display: flex;
@@ -26,9 +26,8 @@ const TextButtonContainer = styled.button`
   }
 `;
 
-const TextButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
-  children = undefined,
-  ...props
-}) => <TextButtonContainer {...props}>{children}</TextButtonContainer>;
+const TextButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({ children = undefined, ...props }) => (
+  <TextButtonContainer {...props}>{children}</TextButtonContainer>
+);
 
 export default TextButton;

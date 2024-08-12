@@ -1,23 +1,44 @@
 import { AddressDto, SeoulGuType } from '@/app/api/type';
 
 export class MarkerData {
-  x: number; // 위도 latitude
-  y: number; // 경도 longitude
+  lat: number; // 위도 latitude
+
+  lng: number; // 경도 longitude
+
   address: string;
+
   gu: SeoulGuType | null;
+
   constructor(data?: AddressDto) {
-    this.x = data ? Number(data.lat) : 0;
-    this.y = data ? Number(data.lon) : 0;
+    this.lat = data ? data.lat : 0;
+    this.lng = data ? data.lng : 0;
     this.address = data ? data.fullAddress : '';
     this.gu = data ? data.gu : null;
   }
-  private convertGuName(address: string): SeoulGuType {
-    const start = address.indexOf('서울특별시') + 5;
-    const end = address.indexOf('구') + 1;
-    const result: string = address.substring(start, end).trim();
+}
 
-    return SeoulGuName[result];
-  }
+export interface MapService {
+  initializeMap(containerId: string, options: any): void;
+
+  setCenter(lat: number, lng: number): void;
+
+  setMarker(lat: number, lng: number, charactor: string): void;
+
+  setMarkers(markerData: MarkerData[]): void;
+
+  setCurrentLocation(lat: number, lng: number): void;
+
+  getMap(): void;
+
+  getMarkers(): void;
+
+  geocode(address: string, callback: (pos: { lat: number; lng: number }) => void): void;
+
+  addZoomListener(callback: () => void): void;
+
+  addDragendListener(callback: () => void): void;
+
+  removeListener(listener: any): void;
 }
 
 export const SeoulGuName: { [key: string]: SeoulGuType } = {

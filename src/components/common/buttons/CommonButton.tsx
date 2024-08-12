@@ -1,4 +1,4 @@
-import { FC, type ButtonHTMLAttributes, PropsWithChildren, useMemo } from 'react';
+import { FC, type ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import Theme from '@/styles/theme';
