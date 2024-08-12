@@ -20,7 +20,7 @@ interface MapAndMarkersProps {
 const MapAndMarkers: FC<MapAndMarkersProps> = ({ searchedAddress, setSearchedAddress }) => {
   const { location } = useGeolocation();
 
-  const { mapRef } = useMap(searchedAddress, location.lat, location.lng);
+  const { mapRef } = useMap(searchedAddress);
 
   const handleCurrentLocation = useCallback(() => {
     if (location) {

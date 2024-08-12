@@ -7,7 +7,7 @@ import { useMapInitialization } from './useMapInitialization';
 import { useMarker } from './useMarker';
 import { useMarkers } from './useMarkers';
 
-export function useMap(searchedAddress: string, lat: number, lng: number) {
+export function useMap(searchedAddress: string) {
   const mapService = useMemo(() => new NaverMapService(), []);
 
   const isMobile = useIsMobile();
@@ -28,14 +28,9 @@ export function useMap(searchedAddress: string, lat: number, lng: number) {
       },
       mapDataControl: false,
       scaleControl: false,
+      center: new naver.maps.LatLng(37.5063, 127.0093),
     },
   });
-
-  useEffect(() => {
-    if (lat && lng) {
-      mapService.setCurrentLocation(lat, lng);
-    }
-  }, [lat, lng, mapService]);
 
   useEffect(() => {
     if (markers) {
