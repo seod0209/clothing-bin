@@ -6,14 +6,15 @@ import ReactQueryClientProvider from '@/lib/query-provider';
 
 import { Pretendard } from '@/styles/fonts';
 import GNB from '@/components/common/gnb';
+import GoogleAdsense from '@/lib/GoogleAdsense';
 
 export const metadata: Metadata = {
   title: '옷체통',
   description: '서울시 헌옷 수거함 위치 정보 표시',
   verification: {
-    google: 'UpcNcYqthSmZULOUf38J0t5w1Ede2tsXexbMikR5eoQ',
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     other: {
-      'naver-site-verification': '388bc2abab53cfe3c86d7214154c3c4b4f95687b',
+      'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_VERIFICATION ?? '',
     },
   },
 };
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </StyledComponentRegistry>
         </body>
+        <GoogleAdsense pId={process.env.NEXT_PUBLIC_AD_SENSE_ID} />
       </html>
     </ReactQueryClientProvider>
   );
