@@ -5,13 +5,8 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 import { useMap } from '@/hooks/useMap';
 
 // Mock hooks
-jest.mock('@/hooks/useGeolocation', () => ({
-  useGeolocation: jest.fn(),
-}));
-
-jest.mock('@/hooks/useMap', () => ({
-  useMap: jest.fn(),
-}));
+jest.mock('@/hooks/useGeolocation');
+jest.mock('@/hooks/useMap');
 
 describe('MapAndMarkers', () => {
   const searchedAddress = '서울특별시 서초구 서초대로';
