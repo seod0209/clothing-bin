@@ -6,6 +6,7 @@ const MarkersAndMapContainer = styled.div`
   position: relative;
   ${Theme.common.flexCenter};
   width: 100%;
+  height: 100%;
 
   background-color: #ebedeb;
 

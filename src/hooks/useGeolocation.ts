@@ -7,7 +7,7 @@ interface Coords {
 
 export function useGeolocation() {
   const [location, setLocation] = useState<Coords | null>(null);
-  const [address, setAddress] = useState<string>('서초구');
+  const [address, setAddress] = useState<string>('');
 
   // Check current location by using geolocation.
   // If there is no agreement with sharing location, set default location.

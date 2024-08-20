@@ -7,7 +7,7 @@ import { useMapInitialization } from './useMapInitialization';
 import { useMarker } from './useMarker';
 import { useMarkers } from './useMarkers';
 
-export function useMap(searchedAddress: string) {
+export function useMap(searchedAddress: string, onMapLoaded: () => void) {
   const mapService = useMemo(() => new NaverMapService(), []);
 
   const isMobile = useIsMobile();
@@ -31,6 +31,12 @@ export function useMap(searchedAddress: string) {
       center: new naver.maps.LatLng(37.5063, 127.0093),
     },
   });
+
+  useEffect(() => {
+    if (mapService.getMap()) {
+      onMapLoaded(); // Notify that the map has loaded
+    }
+  }, [mapService, onMapLoaded]);
 
   useEffect(() => {
     if (markers) {
