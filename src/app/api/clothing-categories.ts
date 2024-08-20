@@ -1,5 +1,4 @@
-// 상의
-import { CategoryInfo } from './type';
+import { CategoryInfo, SeoulGuType } from './type';
 
 const Clothes: CategoryInfo = {
   type: 'Clothes',
@@ -52,4 +51,37 @@ const Etc: CategoryInfo = {
 
 const CategoryInfoList = [Clothes, Bedding, Bags, Shoes, Etc];
 
-export { CategoryInfoList };
+const SeoulAreas: Record<SeoulGuType, string> = {
+  Gangnam: process.env.NEXT_PUBLIC_GANGNAM,
+  Gangseo: process.env.NEXT_PUBLIC_GANGSEO,
+  Gwanak: process.env.NEXT_PUBLIC_GWANAK,
+  Geumcheon: process.env.NEXT_PUBLIC_GEUMCHEON,
+  Dongdaemun: process.env.NEXT_PUBLIC_DONGDAEMUN,
+  Seodaemun: process.env.NEXT_PUBLIC_SEODAEMUN,
+  Seocho: process.env.NEXT_PUBLIC_SEOCHO,
+  Seongbuk: process.env.NEXT_PUBLIC_SEONGBUK,
+  Songpa: process.env.NEXT_PUBLIC_SONGPA,
+  Yangcheon: process.env.NEXT_PUBLIC_YANGCHEON,
+  Yeongdeungpo: process.env.NEXT_PUBLIC_YEONDEUNGPO,
+  Jongno: process.env.NEXT_PUBLIC_JONGNO,
+  Jungnang: process.env.NEXT_PUBLIC_JUNGNANG,
+
+  /** 위도경도 추가 필요 */
+  Gwangjin: process.env.NEXT_PUBLIC_GWANGJIN,
+  Guro: process.env.NEXT_PUBLIC_GURO,
+  Seongdong: process.env.NEXT_PUBLIC_SEONGDONG,
+
+  /** 파일데이터 수정 필요 */
+  Mapo: process.env.NEXT_PUBLIC_MAPO,
+  Eunpyeong: process.env.NEXT_PUBLIC_EUNPYEONG,
+  /** 서비스 미제공 */
+  Gangdong: process.env.NEXT_PUBLIC_GANGDONG,
+  Gangbuk: process.env.NEXT_PUBLIC_GANGBUK,
+  Nowon: process.env.NEXT_PUBLIC_NOWON,
+  Dobong: process.env.NEXT_PUBLIC_DOBONG,
+  Yongsan: process.env.NEXT_PUBLIC_YONGSAN,
+  Jung: process.env.NEXT_PUBLIC_JUNG,
+  Dongjak: process.env.NEXT_PUBLIC_DONGJAK,
+};
+
+export { CategoryInfoList, SeoulAreas };

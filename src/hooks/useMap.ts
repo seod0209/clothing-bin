@@ -12,9 +12,9 @@ export function useMap(searchedAddress: string, onMapLoaded: () => void) {
   const { updateMarkers } = useMarker();
   const { markers } = useMarkers(searchedAddress);
 
-  const mapRef = useMapInitialization({
-    mapService,
-    options: {
+  // options 객체 메모이제이션
+  const options = useMemo(
+    () => ({
       zoom: 16,
       minZoom: 15,
       maxZoom: 19,
@@ -26,7 +26,13 @@ export function useMap(searchedAddress: string, onMapLoaded: () => void) {
       mapDataControl: false,
       scaleControl: false,
       center: new naver.maps.LatLng(37.5063, 127.0093),
-    },
+    }),
+    [],
+  );
+
+  const mapRef = useMapInitialization({
+    mapService,
+    options,
   });
 
   useEffect(() => {
@@ -42,6 +48,7 @@ export function useMap(searchedAddress: string, onMapLoaded: () => void) {
   }, [markers, mapService]);
 
   useEffect(() => {
+    console.log(searchedAddress);
     if (searchedAddress) {
       mapService.geocode(searchedAddress, (pos) => {
         mapService.setCurrentLocation(pos.lat, pos.lng);

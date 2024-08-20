@@ -11,6 +11,7 @@ export function useMapInitialization({ mapService, options }: useMapInitializati
   const mapRef = useRef<MapService | null>(null);
 
   useEffect(() => {
+    console.log('엥???');
     if (mapRef.current === null) {
       mapService.initializeMap('map', options);
       mapRef.current = mapService;
