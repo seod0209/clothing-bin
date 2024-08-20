@@ -7,14 +7,17 @@ jest.mock('@/lib/map/naver-map-service');
 
 describe('useMap', () => {
   const mapService = {
-    getMap: jest.fn().mockReturnValue({}),
+    initializeMap: jest.fn(),
+    setCenter: jest.fn(),
+    setMarker: jest.fn(),
     setMarkers: jest.fn(),
-    geocode: jest.fn(),
     setCurrentLocation: jest.fn(),
+    getMap: jest.fn(),
+    getMarkers: jest.fn(),
+    geocode: jest.fn(),
     addZoomListener: jest.fn(),
     addDragendListener: jest.fn(),
     removeListener: jest.fn(),
-    getMarkers: jest.fn(),
   };
 
   beforeEach(() => {
@@ -28,19 +31,7 @@ describe('useMap', () => {
     // Simulate map initialization
     act(() => {
       // Ensure map initialization has occurred
-      result.current.mapRef.current = {
-        setCurrentLocation: jest.fn(),
-        initializeMap: jest.fn(),
-        setCenter: jest.fn(),
-        setMarker: jest.fn(),
-        setMarkers: jest.fn(),
-        addZoomListener: jest.fn(),
-        addDragendListener: jest.fn(),
-        removeListener: jest.fn(),
-        getMarkers: jest.fn(),
-        getMap: jest.fn(),
-        geocode: jest.fn(),
-      };
+      result.current.mapRef.current = mapService;
     });
 
     expect(onMapLoaded).toHaveBeenCalled();
