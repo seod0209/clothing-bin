@@ -12,7 +12,8 @@ const CommonButtonContainer = styled.button<{
   width: ${({ $isfull }) => ($isfull ? '100%' : 'fit-content')};
   min-width: ${({ $isfull }) => ($isfull ? '100%' : '86px')};
 
-  height: 36px;
+  min-height: 36px;
+  height: fit-content;
 
   border-radius: 8px;
   border: 2px solid;

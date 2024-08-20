@@ -51,7 +51,7 @@ const Etc: CategoryInfo = {
 
 const CategoryInfoList = [Clothes, Bedding, Bags, Shoes, Etc];
 
-const SeoulAreas: Record<SeoulGuType, string> = {
+const SeoulAreas: Record<SeoulGuType, string | undefined> = {
   Gangnam: process.env.NEXT_PUBLIC_GANGNAM,
   Gangseo: process.env.NEXT_PUBLIC_GANGSEO,
   Gwanak: process.env.NEXT_PUBLIC_GWANAK,

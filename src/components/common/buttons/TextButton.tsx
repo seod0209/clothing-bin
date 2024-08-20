@@ -9,7 +9,7 @@ const TextButtonContainer = styled.button`
   align-items: center;
 
   padding: 8px;
-  width: 100%;
+  width: fit-contents;
   height: 40px;
 
   &:hover {

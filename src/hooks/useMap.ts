@@ -48,7 +48,6 @@ export function useMap(searchedAddress: string, onMapLoaded: () => void) {
   }, [markers, mapService]);
 
   useEffect(() => {
-    console.log(searchedAddress);
     if (searchedAddress) {
       mapService.geocode(searchedAddress, (pos) => {
         mapService.setCurrentLocation(pos.lat, pos.lng);

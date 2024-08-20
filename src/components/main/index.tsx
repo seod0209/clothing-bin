@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Theme from '@/styles/theme';
 
 import SearchAddress from '@/components/search-address';
+import MainInfo from '../guide/MainInfo';
 
 const MapAndMarkers = dynamic(() => import('@/components/map-and-markers'), {
   // Naver Maps API는 브라우저에서 실행되므로 클라이언트 사이드에서만 로드해야함.
@@ -16,12 +17,16 @@ const MapAndMarkers = dynamic(() => import('@/components/map-and-markers'), {
 
 const MainContainer = styled.div`
   ${Theme.common.flexCenter};
+
   width: 100%;
 `;
 
 const MainInner = styled.div`
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: flex-start;
   padding: 20px 16px;
-  width: 1160px;
+  width: 1240px;
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -47,6 +52,7 @@ const Main: FC<PropsWithChildren> = ({ children }) => {
   return (
     <MainContainer>
       <MainInner>
+        <MainInfo />
         <SearchAndMapContainer>
           <SearchAddress searchedAddress={searchedAddress} setSearchedAddress={setSearchedAddress} />
           <MapAndMarkers searchedAddress={searchedAddress} setSearchedAddress={setSearchedAddress} />

@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { PiLockers } from 'react-icons/pi';
 import styled from 'styled-components';
 
-import theme from '@/styles/theme';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
 import { routes } from '@/routes';
@@ -29,7 +28,7 @@ const GNBInner = styled.div`
 
   padding: 16px;
 
-  width: 1160px;
+  width: 1240px;
   @media screen and (max-width: 768px) {
     width: 100%;
   }
@@ -49,12 +48,11 @@ const LeftSideContainer = styled.div`
   }
 `;
 const RightSideContainer = styled.div`
-  ${theme.common.flexCenter}
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 16px;
   width: 100%;
-  @media screen and (max-width: 768px) {
-    justify-content: flex-end;
-  }
 `;
 
 const GNB: FC = () => {
