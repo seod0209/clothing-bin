@@ -28,7 +28,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["jest", "@testing-library/jest-dom", "node"]
+    "types": ["jest", "@testing-library/jest-dom", "node", "navermaps"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src", "build/types/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules"]
