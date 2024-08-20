@@ -2,7 +2,6 @@ import { useEffect, useMemo } from 'react';
 
 import { NaverMapService } from '@/lib/map/naver-map-service';
 
-import { useIsMobile } from './useIsMobile';
 import { useMapInitialization } from './useMapInitialization';
 import { useMarker } from './useMarker';
 import { useMarkers } from './useMarkers';
@@ -10,15 +9,13 @@ import { useMarkers } from './useMarkers';
 export function useMap(searchedAddress: string, onMapLoaded: () => void) {
   const mapService = useMemo(() => new NaverMapService(), []);
 
-  const isMobile = useIsMobile();
-
   const { updateMarkers } = useMarker();
   const { markers } = useMarkers(searchedAddress);
 
   const mapRef = useMapInitialization({
     mapService,
     options: {
-      zoom: isMobile ? 16 : 15,
+      zoom: 16,
       minZoom: 15,
       maxZoom: 19,
       zoomControl: true,

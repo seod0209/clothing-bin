@@ -35,7 +35,7 @@ const GNBInner = styled.div`
   }
 `;
 
-const LeftSideConatiner = styled.div`
+const LeftSideContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -63,21 +63,16 @@ const GNB: FC = () => {
 
   const toMain = useCallback(() => router.push(routes.main), [router]);
   const toGuide = useCallback(() => router.push(routes.guide), [router]);
-  const toThrow = useCallback(() => router.push(routes.throw), [router]);
 
-  const listItems = [
-    { name: '이용 가이드', onClick: toGuide },
-    { name: '직접 버림', onClick: toMain },
-    { name: '버려 드림', onClick: toThrow },
-  ];
+  const listItems = [{ name: '이용 가이드', onClick: toGuide }];
 
   return (
     <GNBContainer>
       <GNBInner>
-        <LeftSideConatiner onClick={toMain}>
+        <LeftSideContainer onClick={toMain}>
           <PiLockers size={isMobile ? 28 : 36} color="green" />
           <H1>옷체통</H1>
-        </LeftSideConatiner>
+        </LeftSideContainer>
         {isMobile ? (
           <RightSideContainer>
             <SideMenu items={listItems} />
