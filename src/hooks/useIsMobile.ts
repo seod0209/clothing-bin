@@ -1,13 +1,16 @@
-import { useMemo } from 'react';
-
-import { useWindowSize } from './useWindowSize';
-
-const MOBILE_SIZE = 768;
+import { useEffect, useState } from 'react';
 
 export function useIsMobile() {
-  const size = useWindowSize();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const isMobile = useMemo(() => size < MOBILE_SIZE, [size]);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return isMobile;
 }

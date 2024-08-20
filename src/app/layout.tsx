@@ -3,14 +3,13 @@ import Script from 'next/script';
 
 import StyledComponentRegistry from '@/lib/styled-components-registry';
 import ReactQueryClientProvider from '@/lib/query-provider';
-
-import { Pretendard } from '@/styles/fonts';
-import GNB from '@/components/common/gnb';
 import GoogleAdsense from '@/lib/GoogleAdsense';
 
+import { Pretendard } from '@/styles/fonts';
+
 export const metadata: Metadata = {
-  title: '옷체통',
-  description: '서울시 헌옷 수거함 위치 정보 표시',
+  title: '옷체통: 서울시 의류 수거함',
+  description: '서울시 의류 수거함 위치 정보 표시',
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     other: {
@@ -40,9 +39,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="ko">
         <body className={`${Pretendard.className}`}>
           <StyledComponentRegistry>
-            <header>
-              <GNB />
-            </header>
             <main>{children}</main>
             <Script
               strategy="beforeInteractive"

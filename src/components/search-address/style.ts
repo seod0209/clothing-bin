@@ -31,4 +31,12 @@ const CurrentAddressText = styled.span`
   line-height: 20px;
 `;
 
-export { SearchAddressContainer, SearchOpenButton, CurrentAddressText };
+const PostCodeLayout = styled.div`
+  padding: 8px;
+  height: 420px;
+  @media screen and (max-width: 768px) {
+    height: 300px;
+  }
+`;
+
+export { SearchAddressContainer, SearchOpenButton, CurrentAddressText, PostCodeLayout };

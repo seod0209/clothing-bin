@@ -2,23 +2,20 @@ import { useEffect, useMemo } from 'react';
 
 import { NaverMapService } from '@/lib/map/naver-map-service';
 
-import { useIsMobile } from './useIsMobile';
 import { useMapInitialization } from './useMapInitialization';
 import { useMarker } from './useMarker';
 import { useMarkers } from './useMarkers';
 
-export function useMap(searchedAddress: string) {
+export function useMap(searchedAddress: string, onMapLoaded: () => void) {
   const mapService = useMemo(() => new NaverMapService(), []);
-
-  const isMobile = useIsMobile();
 
   const { updateMarkers } = useMarker();
   const { markers } = useMarkers(searchedAddress);
 
-  const mapRef = useMapInitialization({
-    mapService,
-    options: {
-      zoom: isMobile ? 16 : 15,
+  // options 객체 메모이제이션
+  const options = useMemo(
+    () => ({
+      zoom: 16,
       minZoom: 15,
       maxZoom: 19,
       zoomControl: true,
@@ -29,8 +26,20 @@ export function useMap(searchedAddress: string) {
       mapDataControl: false,
       scaleControl: false,
       center: new naver.maps.LatLng(37.5063, 127.0093),
-    },
+    }),
+    [],
+  );
+
+  const mapRef = useMapInitialization({
+    mapService,
+    options,
   });
+
+  useEffect(() => {
+    if (mapService.getMap()) {
+      onMapLoaded(); // Notify that the map has loaded
+    }
+  }, [mapService, onMapLoaded]);
 
   useEffect(() => {
     if (markers) {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, lazy, Suspense, useCallback } from 'react';
+import React, { FC, lazy, useCallback, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { useMap } from '@/hooks/useMap';
@@ -9,7 +9,7 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 import { MarkersAndMapContainer, MapBox, Location } from './style';
 
 // Lazy load components
-const Loader = lazy(() => import('../common/Loader'));
+const Loader = lazy(() => import('@/components/common/Loader'));
 
 interface MapAndMarkersProps {
   searchedAddress: string;
@@ -18,34 +18,31 @@ interface MapAndMarkersProps {
 }
 
 const MapAndMarkers: FC<MapAndMarkersProps> = ({ searchedAddress, setSearchedAddress }) => {
-  const { location } = useGeolocation();
+  const { location, address } = useGeolocation();
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  const { mapRef } = useMap(searchedAddress);
+  const { mapRef } = useMap(searchedAddress, () => setIsMapLoaded(true));
 
   const handleCurrentLocation = useCallback(() => {
     if (location) {
       mapRef.current?.setCurrentLocation(location.lat, location.lng);
-      setSearchedAddress('');
+
+      setSearchedAddress(address);
     }
   }, [location, mapRef, setSearchedAddress]);
 
   return (
-    <Suspense fallback={<Loader />}>
-      <MarkersAndMapContainer>
-        {mapRef ? (
-          <MapBox id="map">
-            {mapRef.current !== null && (
-              <Location onClick={handleCurrentLocation}>
-                <GrPowerReset />
-                현재 위치 재검색
-              </Location>
-            )}
-          </MapBox>
-        ) : (
-          <Loader />
+    <MarkersAndMapContainer>
+      {!isMapLoaded && <Loader />}
+      <MapBox id="map">
+        {mapRef.current !== null && (
+          <Location onClick={handleCurrentLocation}>
+            <GrPowerReset />
+            현재 위치 검색
+          </Location>
         )}
-      </MarkersAndMapContainer>
-    </Suspense>
+      </MapBox>
+    </MarkersAndMapContainer>
   );
 };
 
