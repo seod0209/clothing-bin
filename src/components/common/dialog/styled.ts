@@ -57,10 +57,11 @@ const StyledDialogFooter = styled.div`
 `;
 
 const StyledDialogTitle = styled(Title)`
+  margin-top: 8px;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5;
-  letter-spacing: -0.01562em;
+  text-align: center;
 `;
 
 const StyledDialogDescription = styled(Description)`

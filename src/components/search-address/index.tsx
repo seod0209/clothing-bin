@@ -2,7 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import DaumPostcodeEmbed, { DaumPostcodeEmbedProps, Address } from 'react-daum-postcode';
 import { TbMapPinSearch } from 'react-icons/tb';
 
-import CommonModal from '../common/modals/Common';
+import ModalLayout from '../common/modals/Layout';
 
 import { SearchAddressContainer, SearchOpenButton, CurrentAddressText, PostCodeLayout } from './style';
 
@@ -22,11 +22,11 @@ const SearchAddress: FC<SearchAddressProps> = ({ searchedAddress = undefined, se
 
   return (
     <SearchAddressContainer>
-      <CommonModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <ModalLayout isOpen={isOpen} title={'주소 검색'} onClose={() => setIsOpen(false)}>
         <PostCodeLayout>
           <DaumPostcodeEmbed style={{ width: '100%', height: '100%' }} onComplete={handleComplete} {...props} />
         </PostCodeLayout>
-      </CommonModal>
+      </ModalLayout>
       <SearchOpenButton onClick={() => setIsOpen(true)}>
         주소를 입력해주세요🤓
         <TbMapPinSearch size={20} />

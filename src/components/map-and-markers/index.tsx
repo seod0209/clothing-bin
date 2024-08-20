@@ -37,7 +37,7 @@ const MapAndMarkers: FC<MapAndMarkersProps> = ({ searchedAddress, setSearchedAdd
             {mapRef.current !== null && (
               <Location onClick={handleCurrentLocation}>
                 <GrPowerReset />
-                현재 위치 재검색
+                현재 위치 검색
               </Location>
             )}
           </MapBox>

@@ -28,7 +28,7 @@ const DialogContent = forwardRef<ElementRef<typeof Content>, ComponentPropsWitho
     <DialogPortal>
       <DialogOverlay />
       <StyledDialogContent ref={ref} className={className} {...props}>
-        {children}
+        <StyledDialogDescription>{children}</StyledDialogDescription>
       </StyledDialogContent>
     </DialogPortal>
   ),
