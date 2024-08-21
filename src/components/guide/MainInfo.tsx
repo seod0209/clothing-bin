@@ -2,8 +2,6 @@
 
 import { FC } from 'react';
 import styled from 'styled-components';
-import { IoIosReturnRight } from 'react-icons/io';
-import CommonButton from '../common/buttons/CommonButton';
 
 const InfoLayout = styled.div`
   width: 100%;
