@@ -1,0 +1,40 @@
+name: Deploy
+env:
+  GOOLE_ADSENSE_TXT: ${{ secrets.GOOLE_ADSENSE_TXT }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create abs.txt
+
+        run: echo "$GOOLE_ADSENSE_TXT" > abs.txt
+
+        # https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel login --token $VERCEL_TOKEN
+          vercel deploy --prod --confirm

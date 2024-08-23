@@ -7,7 +7,7 @@ import GoogleAdsense from '@/lib/GoogleAdsense';
 
 export const metadata: Metadata = {
   title: '헌옷지도(서울시 의류 수거함)',
-  description: '서울시 의류 수거함 위치 정보 표시. 재사용되기전 의류가 잠시 쉬는 곳.',
+  description: '서울시 의류 수거함 위치 정보 표시.',
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     other: {
