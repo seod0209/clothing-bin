@@ -29,18 +29,21 @@ const MainInner = styled.div`
   width: 1240px;
 
   @media screen and (max-width: 768px) {
+    grid-template-columns: none;
     width: 100%;
   }
 `;
 
 const SearchAndMapContainer = styled.div`
   ${Theme.common.flexCenterColumn};
+
   gap: 16px;
   padding: 20px 16px;
   width: 100%;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    margin-top: 16px;
     padding: 8px 0;
   }
 `;
