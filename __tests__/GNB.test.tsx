@@ -15,7 +15,7 @@ describe('GNB Component', () => {
   it('renders and handles navigation correctly', () => {
     render(<GNB />);
 
-    const logo = screen.getByText(/옷체통/i);
+    const logo = screen.getByText(/헌옷지도/i);
     expect(logo).toBeInTheDocument();
     fireEvent.click(logo);
     expect(push).toHaveBeenCalledWith('/');

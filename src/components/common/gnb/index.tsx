@@ -3,7 +3,7 @@
 import React, { FC, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { PiLockers } from 'react-icons/pi';
+import { TbHanger } from 'react-icons/tb';
 import styled from 'styled-components';
 
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -68,8 +68,8 @@ const GNB: FC = () => {
     <GNBContainer>
       <GNBInner>
         <LeftSideContainer onClick={toMain}>
-          <PiLockers size={isMobile ? 28 : 36} color="green" />
-          <H1>옷체통</H1>
+          <TbHanger size={isMobile ? 28 : 36} color="green" />
+          <H1>헌옷지도</H1>
         </LeftSideContainer>
         {isMobile ? (
           <RightSideContainer>
