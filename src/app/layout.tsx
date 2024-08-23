@@ -35,6 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <ReactQueryClientProvider>
       <html lang="ko">
+        <head>
+          <GoogleAdsense pId={process.env.NEXT_PUBLIC_AD_SENSE_ID} />
+        </head>
         <body>
           <StyledComponentRegistry>
             <main>{children}</main>
@@ -51,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </StyledComponentRegistry>
         </body>
-        <GoogleAdsense pId={process.env.NEXT_PUBLIC_AD_SENSE_ID} />
       </html>
     </ReactQueryClientProvider>
   );
